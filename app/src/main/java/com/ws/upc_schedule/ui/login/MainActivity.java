@@ -1,28 +1,35 @@
-package  com.example.upc_schedule.ui.login;
+package com.ws.upc_schedule.ui.login;
 
 import android.app.Activity;
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.upc_schedule.R;
-import com.example.upc_schedule.ui.login.LoginViewModel;
-import com.example.upc_schedule.ui.login.LoginViewModelFactory;
+import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.ui.login.LoginViewModel;
+import com.ws.upc_schedule.ui.login.LoginViewModelFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 
@@ -36,6 +43,19 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
+        final CheckBox saveLoginCheckBox = findViewById(R.id.remember_password);
+
+//保存密码
+        final SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
+        final boolean saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true) {
+            usernameEditText.setText(loginPreferences.getString("username", ""));
+            passwordEditText.setText(loginPreferences.getString("password", ""));
+            saveLoginCheckBox.setChecked(true);
+        }
+
+
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -109,6 +129,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                if (saveLoginCheckBox.isChecked()) {
+                    loginPrefsEditor.putBoolean("saveLogin", true);
+                    loginPrefsEditor.putString("username", username);
+                    loginPrefsEditor.putString("password", password);
+                    loginPrefsEditor.commit();
+                } else {
+                    loginPrefsEditor.clear();
+                    loginPrefsEditor.commit();
+                }
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }

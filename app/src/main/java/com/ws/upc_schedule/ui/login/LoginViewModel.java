@@ -1,14 +1,15 @@
-package com.example.upc_schedule.ui.login;
+package com.ws.upc_schedule.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import android.util.Patterns;
 
-import com.example.upc_schedule.data.LoginRepository;
-import com.example.upc_schedule.data.Result;
-import com.example.upc_schedule.data.model.LoggedInUser;
-import com.example.upc_schedule.R;
+import com.ws.upc_schedule.data.LoginRepository;
+import com.ws.upc_schedule.data.Result;
+import com.ws.upc_schedule.data.model.LoggedInUser;
+import com.ws.upc_schedule.R;
 
 public class LoginViewModel extends ViewModel {
 

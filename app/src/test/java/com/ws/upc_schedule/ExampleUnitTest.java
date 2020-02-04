@@ -1,4 +1,4 @@
-package com.example.upc_schedule;
+package com.ws.upc_schedule;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package  com.example.upc_schedule.ui.login;
+package com.ws.upc_schedule.ui.login;
 
 /**
  * Class exposing authenticated user details to the UI.

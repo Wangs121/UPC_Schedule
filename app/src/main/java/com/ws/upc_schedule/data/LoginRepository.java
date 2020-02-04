@@ -1,6 +1,6 @@
-package com.example.upc_schedule.data;
+package com.ws.upc_schedule.data;
 
-import com.example.upc_schedule.data.model.LoggedInUser;
+import com.ws.upc_schedule.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -22,7 +22,7 @@ public class LoginRepository {
     }
 
     public static LoginRepository getInstance(LoginDataSource dataSource) {
-        if(instance == null){
+        if (instance == null) {
             instance = new LoginRepository(dataSource);
         }
         return instance;

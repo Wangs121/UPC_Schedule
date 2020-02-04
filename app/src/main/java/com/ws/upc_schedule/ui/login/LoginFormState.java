@@ -1,4 +1,4 @@
-package com.example.upc_schedule.ui.login;
+package com.ws.upc_schedule.ui.login;
 
 import androidx.annotation.Nullable;
 

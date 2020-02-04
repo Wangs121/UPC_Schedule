@@ -1,6 +1,6 @@
-package com.example.upc_schedule.data;
+package com.ws.upc_schedule.data;
 
-import com.example.upc_schedule.data.model.LoggedInUser;
+import com.ws.upc_schedule.data.model.LoggedInUser;
 
 import java.io.IOException;
 

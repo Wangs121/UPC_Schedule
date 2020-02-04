@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.login.LoginActivity"
-    android:background="@color/LoginBackground">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ui.login.MainActivity">
 
 
     <TextView
         android:id="@+id/UsernameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="石大学号"
         android:textColor="@color/LoginFont"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintStart_toStartOf="@+id/username" />
@@ -31,7 +29,7 @@
         android:layout_marginTop="96dp"
         android:layout_marginEnd="60dp"
 
-        android:hint="石大学号"
+        android:hint="ID"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +40,7 @@
         android:id="@+id/PasswordTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="数字石大密码"
         android:textColor="@color/LoginFont"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintStart_toStartOf="@+id/password" />
@@ -55,7 +53,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="60dp"
 
-        android:hint="数字石大密码"
+        android:hint="Password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
@@ -78,7 +76,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/remember_password"
         app:layout_constraintVertical_bias="0.05" />
 
     <ProgressBar
@@ -94,4 +92,12 @@
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+    <CheckBox
+        android:id="@+id/remember_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="记住密码"
+        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

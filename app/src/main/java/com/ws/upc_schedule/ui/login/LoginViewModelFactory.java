@@ -1,11 +1,11 @@
-package com.example.upc_schedule.ui.login;
+package com.ws.upc_schedule.ui.login;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
-import com.example.upc_schedule.data.LoginDataSource;
-import com.example.upc_schedule.data.LoginRepository;
+import com.ws.upc_schedule.data.LoginDataSource;
+import com.ws.upc_schedule.data.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

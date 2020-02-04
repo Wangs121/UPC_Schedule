@@ -1,4 +1,4 @@
-package com.example.upc_schedule;
+package com.ws.upc_schedule;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.upc_schedule", appContext.getPackageName());
+        assertEquals("com.ws.upc_schedule", appContext.getPackageName());
     }
 }
