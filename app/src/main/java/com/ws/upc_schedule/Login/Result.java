@@ -1,4 +1,4 @@
-package com.ws.upc_schedule.data;
+package com.ws.upc_schedule.Login;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.
