@@ -1,11 +1,12 @@
 package com.ws.upc_schedule.Login;
 
 import android.content.SharedPreferences;
-import android.util.Log;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ws.upc_schedule.data.SP_name;
+
 
 import java.io.IOException;
 
@@ -34,16 +35,23 @@ public class LoginRepository {
         final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
         LoggedSP_edit.putBoolean("logged",true);
         LoggedSP_edit.commit();
+        //清除cookies
     }
 
-
-    public static Result<String> login_test(String username, String password) {
-
-        if (username.equals("ws") ) {
-            return new Result.Success<>("Success!");
-        }
-        return new Result.Error(new IOException("Error logging in"));
+    public static void WriteCookies(String eai_sess,String UUkey,AppCompatActivity activity){
+        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_CookiesSPname(), MODE_PRIVATE);
+        final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
+        LoggedSP_edit.putString(SP_name.get_CookiesSPKey1(),eai_sess);
+        LoggedSP_edit.putString(SP_name.get_CookiesSPKey2(),UUkey);
+        LoggedSP_edit.commit();
     }
 
+    public static String[] ReadCookies(AppCompatActivity activity){
+        String[] C = new String[2];
+        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_CookiesSPname(), MODE_PRIVATE);
+        C[0] = loggedSP.getString(SP_name.get_CookiesSPKey1(),"");
+        C[1] = loggedSP.getString(SP_name.get_CookiesSPKey2(),"");
+        return C;
+    }
 
 }

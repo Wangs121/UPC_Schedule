@@ -37,11 +37,20 @@ UML一直没耐心学，自己随便画的:cry:
 #### 2020.2.6
 
 * 检查输入合法性(ViewModelProvider)
-* 完成重新整理登录逻辑（程序逻辑框图.drawio）
+* 重新整理登录逻辑（程序逻辑框图.drawio）
 * 实现登录过程模拟
 * 登录状况的判断（SharedPreference)
 * 增加退出登录的功能
 * 添加保存课程信息的数据库类(SQLite)
+
+#### 2020.2.7
+
+* :sweat:觉得使用安卓的登录框架（ViewModelProvider）限制了我，程序被设置的越来越复杂了
+* 移植登录程序(AsyncTask)
+* 保存cookies到本地(SharedPreference)
+* 连接超时处理
+* 抓取信息的重组(Gson)
+* 爬虫移植(AsyncTask)
 
 # 待办
 
@@ -52,8 +61,6 @@ UML一直没耐心学，自己随便画的:cry:
   * 反馈
   * 关于
   * 退出登录
-* 保存cookies到本地--使用okhttp3库
-* 抓取信息的重组
 * 抓取信息保存到本地
 * 设计主界面
 * 关于页面

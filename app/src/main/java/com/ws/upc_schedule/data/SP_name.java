@@ -10,5 +10,18 @@ public class SP_name {
     public static String get_Logged_SPkey(){
         return Logged_SPkey;
     }
+    //Cookies
+    private static String CookiesSPname = "Cookies";
+    private static String CookiesSPKey1 = "eai-sess";
+    private static String CookiesSPKey2 = "UUkey";
+    public static String get_CookiesSPname(){
+        return CookiesSPname;
+    }
+    public static String get_CookiesSPKey1(){
+        return CookiesSPKey1;
+    }
+    public static String get_CookiesSPKey2(){
+        return CookiesSPKey2;
+    }
 
 }

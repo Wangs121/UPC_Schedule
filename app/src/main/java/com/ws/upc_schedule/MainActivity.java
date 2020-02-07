@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.ws.upc_schedule.Login.LoginRepository;
+import com.ws.upc_schedule.data.Crawler;
 import com.ws.upc_schedule.data.SP_name;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
             Intent login = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(login);
         }
-
+        Log.d("Cookie","gonna print cookies");
+        String[] c = LoginRepository.ReadCookies(this);
+        new Crawler().execute(c);
+//        Log.d("Cookie",c[0]);
+//        Log.d("Cookie",c[1]);
     }
 
 }

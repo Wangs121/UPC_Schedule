@@ -1,5 +1,8 @@
 package com.ws.upc_schedule.Login;
 
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,17 +20,14 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-//        LoginRepository Agent = new LoginRepository(username, password);
-
-        Result<String> result = LoginRepository.login_test(username, password);
+    public void setLoginResult(Result<String> result){
         if (result instanceof Result.Success) {
-            loginResult.setValue(new LoginResult("success"));
+            loginResult.setValue(new LoginResult(R.string.login_success));
         } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
+            loginResult.setValue(new LoginResult(result.toString()));
         }
     }
+
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {

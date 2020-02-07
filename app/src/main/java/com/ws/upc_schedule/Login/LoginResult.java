@@ -4,25 +4,25 @@ import androidx.annotation.Nullable;
 
 public class LoginResult {
     @Nullable
-    private String success;
+    private Integer success;
     @Nullable
-    private Integer error;
+    private String error;
 
-    LoginResult(@Nullable Integer error) {
+    LoginResult(@Nullable String error) {
         this.error = error;
     }
 
-    LoginResult(@Nullable String success) {
+    LoginResult(@Nullable Integer success) {
         this.success = success;
     }
 
     @Nullable
-    public String getSuccess() {
+    public Integer getSuccess() {
         return success;
     }
 
     @Nullable
-    public Integer getError() {
+    public String getError() {
         return error;
     }
 }
