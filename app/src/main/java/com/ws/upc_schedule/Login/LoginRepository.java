@@ -23,7 +23,7 @@ public class LoginRepository {
         return loggedSP.getBoolean(SP_name.get_Logged_SPkey(),false);
     }
 
-    public void logout(AppCompatActivity activity) {
+    public static void logout(AppCompatActivity activity) {
         final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_Logged_SPname(), MODE_PRIVATE);
         final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
         LoggedSP_edit.clear();

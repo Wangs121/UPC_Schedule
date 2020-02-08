@@ -49,22 +49,28 @@ UML一直没耐心学，自己随便画的:cry:
 * 移植登录程序(AsyncTask)
 * 保存cookies到本地(SharedPreference)
 * 连接超时处理
-* 抓取信息的重组(Gson)
 * 爬虫移植(AsyncTask)
+
+#### 2020.2.8
+
+* 解析至SQLite数据库保存格式（Gson）
+* 抓取信息保存到本地(SQLite)
+* 完成粗糙主界面 （[revolvingweekview](https://github.com/jlurena/revolvingweekview) ）
 
 # 待办
 
+* 自动判断当前属于年份、学期
 * 全屏左侧导航栏
+  * 设置
+    * 当前学期
   * logo图片
   * 主题
   * 刷新数据
   * 反馈
   * 关于
   * 退出登录
-* 抓取信息保存到本地
-* 设计主界面
 * 关于页面
-* widget设计
+* widget设计（模仿MD课程表，按照他的思路做）
   * 显示一周信息，周日为第一天
   * 刷新按钮（optional）
   * 自动、手动切换当前显示的教学周
