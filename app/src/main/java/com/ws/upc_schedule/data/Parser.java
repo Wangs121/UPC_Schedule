@@ -1,8 +1,9 @@
 package com.ws.upc_schedule.data;
 
+import android.content.Context;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -17,19 +18,11 @@ import java.util.Collection;
 import com.ws.upc_schedule.data.ClassesContainer.CMessage;
 
 public class Parser {
-    private AppCompatActivity activity;
-    private ClassesDataBase dh;
 
-
-    public Parser(AppCompatActivity activity){
-        this.activity = activity;
-        dh = new ClassesDataBase(this.activity);
-    }
-
-    public void parser(Document doc){
-//        Log.d("data",doc.toString());
+    public static void parser(Document doc){
+        //解析
         Gson g = new Gson();
-        String con = doc.body().text().toString();
+        String con = doc.body().text();
 //        Log.d("data",con);
         JsonObject table;
         JsonElement d,weeks;
@@ -46,133 +39,84 @@ public class Parser {
 
         Type collectionType = new TypeToken<Collection<ClassesContainer>>(){}.getType();
         Collection<ClassesContainer> classes = g.fromJson(buffer,collectionType);
-
-        //解析至存储至数据库的格式
         int i=0;
         for(ClassesContainer c:classes) {
             //第一次遍历为周日，随之增加
             if(c.getc_1()!=null && !c.getc_1().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_1()) {
-                    Log.d("parse",weekdays[i]+"-01");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-01",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_2()!=null && !c.getc_2().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_2()) {
-                    Log.d("parse",weekdays[i]+"-02");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-02",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_3()!=null && !c.getc_3().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_3()) {
-                    Log.d("parse",weekdays[i]+"-03");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-03",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_4()!=null && !c.getc_4().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_4()) {
-                    Log.d("parse",weekdays[i]+"-04");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-04",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_5()!=null && !c.getc_5().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_5()) {
-                    Log.d("parse",weekdays[i]+"-05");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-05",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_6()!=null && !c.getc_6().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_6()) {
-                    Log.d("parse",weekdays[i]+"-06");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-06",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_7()!=null && !c.getc_7().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_7()) {
-                    Log.d("parse",weekdays[i]+"-07");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-07",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_8()!=null && !c.getc_8().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_8()) {
-                    Log.d("parse",weekdays[i]+"-08");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-08",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_9()!=null && !c.getc_9().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_9()) {
-                    Log.d("parse",weekdays[i]+"-09");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-09",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_10()!=null && !c.getc_10().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_10()) {
-                    Log.d("parse",weekdays[i]+"-10");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-10",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_11()!=null && !c.getc_11().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_11()) {
-                    Log.d("parse",weekdays[i]+"-11");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-11",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             if(c.getc_12()!=null && !c.getc_12().isEmpty()) {
                 //
                 for(CMessage cm:c.getc_12()) {
-                    Log.d("parse",weekdays[i]+"-12");
-                    Log.d("parse",cm.get_course_name());
-                    Log.d("parse",cm.get_location());
-                    Log.d("parse",cm.get_teacher());
-                    Log.d("parse",Integer.toString(cm.get_totalLength()));
+                    dhHelper.cdbh_insert(weekdays[i]+"-12",cm.get_course_name(),cm.get_location(),cm.get_teacher(),cm.get_totalLength());
                 }
             }
             i+=1;
         }
 
     }
+
 }

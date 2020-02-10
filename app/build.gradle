@@ -30,4 +30,11 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'
     //https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.6'
+    //https://github.com/jlurena/revolvingweekview
+    implementation 'me.jlurena:revolvingweekview:2.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.navigation:navigation-runtime:2.2.1'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-ui:2.0.0'
 }

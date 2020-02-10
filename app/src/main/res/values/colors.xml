@@ -8,4 +8,8 @@
     <color name="LoginFont">#000000</color>
     <color name="LoginButtonBg">#000000</color>
     <color name="LoginButtonFo">#FFFFFF</color>
+
+<!--    导航栏-->
+    <color name="black">#a0151515</color>
+    <color name="white">#ffffff</color>
 </resources>

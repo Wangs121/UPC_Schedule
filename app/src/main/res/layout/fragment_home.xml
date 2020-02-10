@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2019-2020"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15dp"/>
+    <TextView
+        android:id="@+id/terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第1学期"
+        app:layout_constraintTop_toBottomOf="@id/year"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15dp"/>
+    <TextView
+        android:id="@+id/weekdays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第1周"
+        app:layout_constraintTop_toBottomOf="@id/terms"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1月"
+        android:textSize="15dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toTopOf="@+id/revolving_weekview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+
+    <me.jlurena.revolvingweekview.WeekView
+        android:id="@+id/revolving_weekview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/weekdays"
+
+        app:dayBackgroundColor="#05000000"
+        app:eventTextColor="@android:color/white"
+        app:headerColumnBackground="#ffefefef"
+        app:headerColumnPadding="8dp"
+        app:headerColumnTextColor="#8f000000"
+        app:headerRowBackgroundColor="#00000000"
+        app:headerRowPadding="10dp"
+        app:hourHeight="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:noOfVisibleDays="7"
+        app:todayBackgroundColor="#1848adff"
+        tools:layout_editor_absoluteX="0dp"
+        app:minTime="8"
+        app:maxTime="22"
+        app:showNowLine="true"
+        app:eventCornerRadius="4dp"
+        app:firstDayOfWeek="sunday"
+        app:showFirstDayOfWeekFirst="true"
+        app:horizontalFlingEnabled="false"
+        app:xScrollingSpeed="0"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

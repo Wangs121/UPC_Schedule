@@ -1,8 +1,5 @@
 package com.ws.upc_schedule.Login;
 
-import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

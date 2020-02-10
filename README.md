@@ -57,28 +57,35 @@ UML一直没耐心学，自己随便画的:cry:
 * 抓取信息保存到本地(SQLite)
 * 完成粗糙主界面 （[revolvingweekview](https://github.com/jlurena/revolvingweekview) ）
 
-# 待办
+#### 2020.2.9
 
-* 自动判断当前属于年份、学期
-* 全屏左侧导航栏
+* 搬运MD课表中的桌面插件（未移植）[mnnyang](https://github.com/mnnyang)/**[ClassSchedule](https://github.com/mnnyang/ClassSchedule)**
+* 侧面导航栏完成一半
+
+#### 2020.2.10
+
+* 完成侧面导航栏，移植完毕
+
+  * 主页
   * 设置
     * 当前学期
-  * logo图片
-  * 主题
-  * 刷新数据
-  * 反馈
-  * 关于
-  * 退出登录
+    * 刷新数据
+    * 退出登录
+
+  * 反馈>
+  * 关于>
+
+* 配置主页
+
+# 待办
+
+* 设置页面
+* 反馈页面
 * 关于页面
-* widget设计（模仿MD课程表，按照他的思路做）
-  * 显示一周信息，周日为第一天
-  * 刷新按钮（optional）
-  * 自动、手动切换当前显示的教学周
-  * home button，返回当前教学周
-  * 当天日期醒目的颜色
-  * 可选的各种颜色主题
+* 自动判断当前属于年份、学期
 * 更新、反馈方法
 * 美化
+* 各类接口
 
 ## optional
 

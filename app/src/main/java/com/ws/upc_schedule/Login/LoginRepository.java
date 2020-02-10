@@ -1,14 +1,13 @@
 package com.ws.upc_schedule.Login;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ws.upc_schedule.data.SP_name;
+import com.ws.upc_schedule.R;
 
-
-import java.io.IOException;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -17,40 +16,39 @@ import static android.content.Context.MODE_PRIVATE;
  * maintains an in-memory cache of login status and user credentials information.
  */
 public class LoginRepository {
-
-    public static boolean isLoggedIn(AppCompatActivity activity) {
-        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_Logged_SPname(), MODE_PRIVATE);
-        return loggedSP.getBoolean(SP_name.get_Logged_SPkey(),false);
+    public static boolean isLoggedIn(Context context) {
+        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Logged_SPname), MODE_PRIVATE);
+        return loggedSP.getBoolean(String.valueOf(R.string.Logged_SPkey),false);
     }
 
-    public static void logout(AppCompatActivity activity) {
-        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_Logged_SPname(), MODE_PRIVATE);
+    public static void logout(Context context) {
+        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Logged_SPname), MODE_PRIVATE);
         final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
         LoggedSP_edit.clear();
         LoggedSP_edit.commit();
     }
 
-    public static void loggedIn(AppCompatActivity activity){
-        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_Logged_SPname(), MODE_PRIVATE);
+    public static void loggedIn(Context context){
+        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Logged_SPname), MODE_PRIVATE);
         final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
-        LoggedSP_edit.putBoolean("logged",true);
+        LoggedSP_edit.putBoolean(String.valueOf(R.string.Logged_SPkey),true);
         LoggedSP_edit.commit();
         //清除cookies
     }
 
-    public static void WriteCookies(String eai_sess,String UUkey,AppCompatActivity activity){
-        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_CookiesSPname(), MODE_PRIVATE);
+    public static void WriteCookies(String eai_sess,String UUkey,Context context){
+        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
         final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
-        LoggedSP_edit.putString(SP_name.get_CookiesSPKey1(),eai_sess);
-        LoggedSP_edit.putString(SP_name.get_CookiesSPKey2(),UUkey);
+        LoggedSP_edit.putString(String.valueOf(R.string.Cookies_SPkey1),eai_sess);
+        LoggedSP_edit.putString(String.valueOf(R.string.Cookies_SPkey2),UUkey);
         LoggedSP_edit.commit();
     }
 
-    public static String[] ReadCookies(AppCompatActivity activity){
+    public static String[] ReadCookies(Context context){
         String[] C = new String[2];
-        final SharedPreferences loggedSP = activity.getSharedPreferences(SP_name.get_CookiesSPname(), MODE_PRIVATE);
-        C[0] = loggedSP.getString(SP_name.get_CookiesSPKey1(),"");
-        C[1] = loggedSP.getString(SP_name.get_CookiesSPKey2(),"");
+        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
+        C[0] = loggedSP.getString(String.valueOf(R.string.Cookies_SPkey1),"");
+        C[1] = loggedSP.getString(String.valueOf(R.string.Cookies_SPkey2),"");
         return C;
     }
 
