@@ -165,37 +165,37 @@ public class LoginActivity extends AppCompatActivity {
             String url_check = "https://app.upc.edu.cn/uc/wap/login/check";
             String username = ID[0];
             String password = ID[1];
-//            try {
-//                Log.d("Cookie", "Start to connect");
-//                Connection.Response Origin = Jsoup.connect(url)
-//                        .method(Connection.Method.GET)
-//                        .timeout(3000)
-//                        .execute();
-//                Log.d("Cookie", Origin.cookies().toString());
-//                Connection.Response LoginResult = Jsoup.connect(url_check)
-//                        .data("username", username)
-//                        .data("password", password)
-//                        .cookies(Origin.cookies())
-//                        .ignoreContentType(true)
-//                        .method(Connection.Method.POST)
-//                        .timeout(3000)
-//                        .execute();
-////                Log.d("Cookie", LoginResult.cookies().toString());
-//                String body = LoginResult.body();
-////                Log.d("Cookie", body);
-//                if (body.contains("操作成功"))  {
-//                    //保存cookies
-//                    LoginRepository.WriteCookies(LoginResult.cookies().get("eai-sess"),LoginResult.cookies().get("UUkey"),getApplicationContext());
-//
-//                    return "操作成功";
-//                }
-//                return body;
-//            }catch(Exception e) {
-////                Log.d("Cookie","directly err");
-////                Log.d("Cookie",e.toString());
-//                return e.toString();
-//            }
-            return  "操作成功";
+            try {
+                Log.d("Cookie", "Start to connect");
+                Connection.Response Origin = Jsoup.connect(url)
+                        .method(Connection.Method.GET)
+                        .timeout(3000)
+                        .execute();
+                Log.d("Cookie", Origin.cookies().toString());
+                Connection.Response LoginResult = Jsoup.connect(url_check)
+                        .data("username", username)
+                        .data("password", password)
+                        .cookies(Origin.cookies())
+                        .ignoreContentType(true)
+                        .method(Connection.Method.POST)
+                        .timeout(3000)
+                        .execute();
+//                Log.d("Cookie", LoginResult.cookies().toString());
+                String body = LoginResult.body();
+//                Log.d("Cookie", body);
+                if (body.contains("操作成功"))  {
+                    //保存cookies
+                    LoginRepository.WriteCookies(LoginResult.cookies().get("eai-sess"),LoginResult.cookies().get("UUkey"),getApplicationContext());
+
+                    return "操作成功";
+                }
+                return body;
+            }catch(Exception e) {
+//                Log.d("Cookie","directly err");
+//                Log.d("Cookie",e.toString());
+                return e.toString();
+            }
+//            return  "操作成功";
         }
         @Override
         protected void onPostExecute(String result){

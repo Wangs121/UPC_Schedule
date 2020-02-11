@@ -3,14 +3,6 @@ package com.ws.upc_schedule;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,7 +10,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ws.upc_schedule.Login.LoginRepository;
-import com.ws.upc_schedule.data.Crawler;
 import com.ws.upc_schedule.data.dhHelper;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,7 +17,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
         }else{
             //初始化数据库
             dhHelper.cdbh_init(getApplicationContext());
+            //获得当前学期第一天
+            myDateUtils.initilize(getApplicationContext());
+
             //navigation 初始化
-            setContentView(R.layout.activity_main1);
+            setContentView(R.layout.activity_main);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 //        FloatingActionButton fab = findViewById(R.id.fab);

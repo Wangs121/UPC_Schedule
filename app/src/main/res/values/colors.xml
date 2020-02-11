@@ -12,4 +12,5 @@
 <!--    导航栏-->
     <color name="black">#a0151515</color>
     <color name="white">#ffffff</color>
+    <color name="invisable">#00FFFFFF</color>
 </resources>

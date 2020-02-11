@@ -74,19 +74,54 @@ UML一直没耐心学，自己随便画的:cry:
 
   * 反馈>
   * 关于>
-
 * 配置主页
+
+#### 2020.2.11
+
+* 成功显示到当前周到主页面
+* 更换图标与名称
 
 # 待办
 
+* 显示其他周
+* 移植桌面插件
 * 设置页面
 * 反馈页面
 * 关于页面
-* 自动判断当前属于年份、学期
 * 更新、反馈方法
 * 美化
-* 各类接口
 
 ## optional
 
 * 使用SQLite记住用户名密码（安全性更高）
+
+# 对我有帮助的文章/lib
+
+[使用 SQLite 保存数据](https://developer.android.com/training/data-storage/sqlite?hl=zh_cn#java)
+
+[SQLiteDemo](https://github.com/limit-DNE/SQLiteDemo)
+
+[Add a “Remember me” checkbox](https://stackoverflow.com/questions/9370293/add-a-remember-me-checkbox)
+
+ [Android sqlite how to check if a record exists](https://stackoverflow.com/questions/20415309/android-sqlite-how-to-check-if-a-record-exists)
+
+[Android Widgets](https://medium.com/android-bits/android-widgets-ad3d166458d3)
+
+[mnnyang](https://github.com/mnnyang)/**[ClassSchedule](https://github.com/mnnyang/ClassSchedule)**
+
+[google](https://github.com/google)/**[gson](https://github.com/google/gson)**
+
+[GSON throwing “Expected BEGIN_OBJECT but was BEGIN_ARRAY”?](https://stackoverflow.com/questions/9598707/gson-throwing-expected-begin-object-but-was-begin-array)
+
+[Gson解析多层嵌套复杂数据](https://my.oschina.net/ydsakyclguozi/blog/480050)
+
+ [【Android】数据存储（一） SharedPreferences详解](https://www.jianshu.com/p/59b266c644f3)
+
+[Android Navigation Drawer Tutorial using Fragments - Updated](https://www.youtube.com/watch?v=J8GB_b8qyK8)
+
+[Understanding AsyncTask – Once and Forever](https://androidresearch.wordpress.com/2012/03/17/understanding-asynctask-once-and-forever/)
+
+ [jlurena](https://github.com/jlurena)/**[revolvingweekview](https://github.com/jlurena/revolvingweekview)**
+
+[Android Intents - Tutorial](https://www.vogella.com/tutorials/AndroidIntent/article.html)
+

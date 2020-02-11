@@ -3,33 +3,37 @@ package com.ws.upc_schedule.navigation.setting;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.LoginActivity;
-import com.ws.upc_schedule.MainActivity;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.Crawler;
 import com.ws.upc_schedule.data.dhHelper;
+import com.ws.upc_schedule.myDateUtils;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 public class SettingFragment extends Fragment {
 
     private SettingViewModel settingViewModel;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dhHelper.cdbh_init(getContext());
@@ -41,8 +45,14 @@ public class SettingFragment extends Fragment {
         final Button clear = root.findViewById(R.id.clear);
         final Button show_all = root.findViewById(R.id.show);
         final TextView textView = root.findViewById(R.id.CookieView);
+//        String show = myDateUtils.getCurrentYMD()+"\n"+myDateUtils.getFirstDayofTerm();
+//        textView.setText(show);
+//for debug-------------------
+        String a = "2019-12-10";
+//        String b = "2019-09-08";
+        textView.setText(myDateUtils.getCurrentWeek()+"");
 
-        textView.setText(Boolean.toString(dhHelper.get_all_data().getCount()<=0));
+// -------------------------------------
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

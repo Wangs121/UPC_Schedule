@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UPC_Schedule</string>
+    <string name="app_name">U课表</string>
     <!-- Strings related to login -->
 
     <string name="action_sign_in_short">登录</string>
@@ -13,6 +13,8 @@
     <string name="Cookies_SPname">Cookies</string>
     <string name="Cookies_SPkey1">eai-sess</string>
     <string name="Cookies_SPkey2">UUkey</string>
+    <string name="FirstDayofTerm">FirstDayofTerm</string>
+    <string name="FirstDayofTermKey">FirstDayofTermKey</string>
     <!--  Navigation  -->
     <string name="nav_header_title">课程表</string>
     <string name="nav_header_subtitle">The best time to plant a tree is twenty years ago. The second best time is now.</string>

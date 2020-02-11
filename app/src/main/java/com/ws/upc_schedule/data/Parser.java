@@ -1,6 +1,7 @@
 package com.ws.upc_schedule.data;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 
@@ -15,9 +16,14 @@ import org.jsoup.nodes.Document;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
+import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.ClassesContainer.CMessage;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Parser {
+
+    public static String firstDayofTerm = null;
 
     public static void parser(Document doc){
         //解析
@@ -40,6 +46,10 @@ public class Parser {
         Type collectionType = new TypeToken<Collection<ClassesContainer>>(){}.getType();
         Collection<ClassesContainer> classes = g.fromJson(buffer,collectionType);
         int i=0;
+        if(firstDayofTerm == null){
+            firstDayofTerm = weekdays[0];
+            dhHelper.storeFirstDayofTerm(firstDayofTerm);
+        }
         for(ClassesContainer c:classes) {
             //第一次遍历为周日，随之增加
             if(c.getc_1()!=null && !c.getc_1().isEmpty()) {
@@ -118,5 +128,6 @@ public class Parser {
         }
 
     }
+
 
 }
