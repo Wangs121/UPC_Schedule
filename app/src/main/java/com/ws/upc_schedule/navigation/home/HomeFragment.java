@@ -1,7 +1,9 @@
 package com.ws.upc_schedule.navigation.home;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.RectF;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -135,21 +138,26 @@ public class HomeFragment extends Fragment{
                 }
 
 
-                    for(Course c:showWeekCourses){
-                        DayTime startTime = new DayTime(DayOfWeek.of(c.getDayofWeeks()),LocalTime.of(c.geStart2Time(),0));
-                        DayTime endTime = new DayTime(startTime);
-                        endTime.addHours(c.getLength());
-                        WeekViewEvent event = new WeekViewEvent("0",
-                                c.getName()+"\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
-                        event.setColor(c.getColor());
-                        events.add(event);
-                    }
+                for(Course c:showWeekCourses){
+                    DayTime startTime = new DayTime(DayOfWeek.of(c.getDayofWeeks()),LocalTime.of(c.geStart2Time(),0));
+                    DayTime endTime = new DayTime(startTime);
+                    endTime.addHours(c.getLength());
+                    WeekViewEvent event = new WeekViewEvent("0",
+                            c.getName()+"\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
+                    event.setColor(c.getColor());
+                    events.add(event);
+                }
 //                int MofD = Integer.parseInt(selectedFirstWeekDaysMonthDay.substring(8));
 //                    Toast.makeText(getContext(),MofD+"",Toast.LENGTH_SHORT).show();
                 return events;
             }
         });
-
+        mWeekView.setOnEventClickListener(new WeekView.EventClickListener() {
+            @Override
+            public void onEventClick(WeekViewEvent event, RectF eventRect) {
+                dialog(event.getName());
+            }
+        });
         setupDateTimeInterpreter();
         return root;
     }
@@ -182,23 +190,18 @@ public class HomeFragment extends Fragment{
             }
         });
     }
-//    private List<WeekViewEvent> myEventLoader(){
-//        List<WeekViewEvent> events = new ArrayList<>();
-//        // Add some events
-//        if(currentWeek==selectedWeek){
-//            DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
-//            DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
-//            WeekViewEvent event = new WeekViewEvent("0","互换性\n西朗\n呸呸呸",startTime,endTime);
-//            event.setColor(Color.argb(255,255,0,0));
-//            events.add(event);
-//
-//        }else{
-//            DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
-//            DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
-//            WeekViewEvent event = new WeekViewEvent("1","aaa\nbbb\nccc",startTime,endTime);
-//            event.setColor(Color.argb(255,0,255,0));
-//            events.add(event);
-//        }
-//        return events;
-//    }
+    public void dialog(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(message);
+        builder.setTitle("课程详情");
+        builder.setCancelable(true);
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 }
