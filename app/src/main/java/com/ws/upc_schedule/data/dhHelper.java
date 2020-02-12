@@ -3,8 +3,12 @@ package com.ws.upc_schedule.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.myDateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +18,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class dhHelper {
     private static ClassesDataBase cdbh = null;
     private static SharedPreferences FirstDayofTerm = null;
-
-    private static String currentDate = null;//本周日的日期
+    private static List<Course> currentWeekCourses = null;
 
     public static void cdbh_init(Context context){
         cdbh = new ClassesDataBase(context);
@@ -59,29 +62,37 @@ public class dhHelper {
 ////            courses.add(new Course())
 //        }
 //    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public static List<Course> get_one_weekCourse(String yearDayMonth) {
         List<Course> courses = new ArrayList<>();
-        int sd = Integer.parseInt(yearDayMonth.substring(8));
-        int id;
-        String yearDay = yearDayMonth.substring(0,8);
+//        int sd = Integer.parseInt(yearDayMonth.substring(8));
+//        int id;
+//        String yearDay = yearDayMonth.substring(0,8);
         String index ;
 
         for(int day=0;day<7;day++){
             for(int classes=0;classes<12;classes++){
-                id = sd+day;
-                if(id<10){
-                    if(classes<10){
-                        index = yearDay+"0"+id+"-0"+classes;
-                    }else {
-                        index = yearDay+"0"+id+"-"+classes;
-                    }
-                }else{
-                    if(classes<10){
-                        index = yearDay+ id +"-0"+classes;
-                    }else {
-                        index = yearDay+ id +"-"+classes;
-                    }
+//                id = sd+day;
+                index = myDateUtils.dd2YMD(yearDayMonth,day);
+
+                if(classes<10){
+                    index +=  "-0"+classes;
+                }else {
+                    index += "-"+classes;
                 }
+//                if(id<10){
+//                    if(classes<10){
+//                        index = yearDay+"0"+id+"-0"+classes;
+//                    }else {
+//                        index = yearDay+"0"+id+"-"+classes;
+//                    }
+//                }else{
+//                    if(classes<10){
+//                        index = yearDay+ id +"-0"+classes;
+//                    }else {
+//                        index = yearDay+ id +"-"+classes;
+//                    }
+//                }
                 Cursor data = get_one_data(index);
                 if(data.getCount()>0){
                     data.moveToNext();
@@ -92,5 +103,13 @@ public class dhHelper {
             }
         }
         return courses;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static List<Course> getCurrentWeekCourses() {
+        if(currentWeekCourses==null){
+            currentWeekCourses = dhHelper.get_one_weekCourse(myDateUtils.getCurrentFirstWeekDaysMonthDay());
+        }
+        return currentWeekCourses;
     }
 }

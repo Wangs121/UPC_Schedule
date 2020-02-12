@@ -25,6 +25,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class myDateUtils {
 
     private static String firstDayofTerm = null;
+    private static String endDayofTerm = null;
 //    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static int nowYear;
@@ -32,12 +33,14 @@ public class myDateUtils {
     private static int nowDay;
     private static String currentYMD;
     private static int currentWeek;
-
+    //本周日的YMD格式
+    private static String CurrentFirstWeekDaysMonthDay = null;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void initilize(Context context){
         final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.FirstDayofTerm), MODE_PRIVATE);
         firstDayofTerm = loggedSP.getString(String.valueOf(R.string.FirstDayofTermKey),null);
+        endDayofTerm = dd2YMD(firstDayofTerm,17*7);
         nowYear = Calendar.getInstance().get(Calendar.YEAR);
         nowMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
         nowDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -52,7 +55,18 @@ public class myDateUtils {
         }else {
             currentYMD+=nowDay;
         }
+        //未开学
+        if(getSpecificWeek(currentYMD)<0){
+            currentYMD = firstDayofTerm;
+            CurrentFirstWeekDaysMonthDay = firstDayofTerm;
+        }
+        //学期已结束
+        if(getSpecificWeek(currentYMD) > getSpecificWeek(endDayofTerm)){
+            currentYMD = endDayofTerm;
+            CurrentFirstWeekDaysMonthDay = endDayofTerm;
+        }
         currentWeek = getSpecificWeek(currentYMD);
+
     }
 
     public static String getFirstDayofTerm() {
@@ -79,7 +93,8 @@ public class myDateUtils {
         LocalDate d1 = LocalDate.parse(yearMonthDay,formatter);
         LocalDate d2 = LocalDate.parse(firstDayofTerm,formatter);
         days = (int)ChronoUnit.DAYS.between(d2, d1);
-        return (int)days/7;
+        days = (int)days/7+1;
+        return days;
     }
 
     public static String getCurrentYMD() {
@@ -87,6 +102,11 @@ public class myDateUtils {
     }
 
     public static int getCurrentWeek() {
+//        if(currentWeek<=0){
+//            return 1;
+//        }else if(currentWeek>18){
+//            return 18;
+//        }
         return currentWeek;
     }
 
@@ -125,19 +145,28 @@ public class myDateUtils {
         }
         return  ret;
     }
-
+//    有问题
     public static String getCurrentFirstWeekDaysMonthDay(){
-        String YM = currentYMD.substring(0,8);
-        int d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - Calendar.getInstance().get(Calendar.DAY_OF_WEEK) +1;
-        if(d<10){
-            YM+= "0"+d;
-        }else {
-            YM+=d;
+        if(CurrentFirstWeekDaysMonthDay==null){
+            String YM = currentYMD.substring(0,8);
+            int d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - Calendar.getInstance().get(Calendar.DAY_OF_WEEK) +1;
+            if(d<10){
+                YM+= "0"+d;
+            }else {
+                YM+=d;
+            }
+            CurrentFirstWeekDaysMonthDay= YM;
         }
-        return YM;
+        return CurrentFirstWeekDaysMonthDay;
     }
-//    //偏离当前周数转换到yyyymmdd格式
-//    public static String dW2YMD(int dw){
-//
-//    }
+//    //偏离当前天数转换到yyyy-mm-dd格式
+    public static String dd2YMD(int dw){
+        LocalDate d1 = LocalDate.parse(getCurrentFirstWeekDaysMonthDay(),formatter);
+        return d1.plusDays(dw).format(formatter);
+    }
+//    //偏离指定天数转换到yyyy-mm-dd格式
+    public static String dd2YMD(String YDM,int dw){
+        LocalDate d1 = LocalDate.parse(YDM,formatter);
+        return d1.plusDays(dw).format(formatter);
+    }
 }

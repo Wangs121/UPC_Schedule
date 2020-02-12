@@ -36,21 +36,12 @@
         android:background="#00FFFFFF"/>
 
 
-    <TextView
-        android:id="@+id/year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2019-2020"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="15dp"/>
+
     <TextView
         android:id="@+id/term"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="第1学期"
-        app:layout_constraintTop_toBottomOf="@id/year"
+        android:text="2019-2020第1学期"
         tools:ignore="MissingConstraints"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,17 +56,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textSize="15dp"/>
-
     <TextView
+        android:id="@+id/YMdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1月"
-        android:textSize="15dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toTopOf="@+id/revolving_weekview"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:text="2019-08"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/week"
+        android:textSize="15dp"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="1月"-->
+<!--        android:textSize="15dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/revolving_weekview"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        tools:ignore="MissingConstraints" />-->
 
 
 
@@ -83,8 +83,8 @@
         android:id="@+id/revolving_weekview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/week"
-
+        app:layout_constraintTop_toBottomOf="@id/YMdate"
+        app:eventTextSize="11dp"
         app:dayBackgroundColor="#05000000"
         app:eventTextColor="@android:color/white"
         app:headerColumnBackground="#ffefefef"

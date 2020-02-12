@@ -41,17 +41,19 @@ public class HomeFragment extends Fragment{
 
     private WeekView mWeekView;
     private Button backButton;
-    private TextView years;
+    private TextView YMdate;
     private TextView term;
     private TextView week;
     private ImageButton nextWeekButton;
     private ImageButton previousWeekButton;
 
-    private List<Integer> MonthDayOfThisWeek ;
-    private int currentWeek = 1 ;
-    private int selectedWeek = 1 ;
-    private List<Course> currentWeekCourses;
+//    private List<Integer> MonthDayOfThisWeek ;
+    private int currentWeek ;
+    private int selectedWeek ;
+    private List<Course> showWeekCourses;
     private String CurrentFirstWeekDaysMonthDay;
+    private String selectedFirstWeekDaysMonthDay;
+    private int dayofMonth ;
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,27 +62,32 @@ public class HomeFragment extends Fragment{
         currentWeek = myDateUtils.getCurrentWeek();
         selectedWeek = currentWeek;
         //控件初始化
-        MonthDayOfThisWeek = myDateUtils.getCurrent7Days();
+//        MonthDayOfThisWeek = myDateUtils.getCurrent7Days();
         //本周课程
         CurrentFirstWeekDaysMonthDay = myDateUtils.getCurrentFirstWeekDaysMonthDay();
-        currentWeekCourses = dhHelper.get_one_weekCourse(CurrentFirstWeekDaysMonthDay);
+        dayofMonth = Integer.parseInt(CurrentFirstWeekDaysMonthDay.substring(8));
+        showWeekCourses = dhHelper.getCurrentWeekCourses();
 //        Toast.makeText(getContext(),myDateUtils.getCurrentFirstWeekDaysMonthDay(),Toast.LENGTH_LONG).show();
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mWeekView = (WeekView) root.findViewById(R.id.revolving_weekview);
         backButton = (Button) root.findViewById(R.id.back);
         nextWeekButton = (ImageButton) root.findViewById(R.id.nextWeek);
         previousWeekButton = (ImageButton) root.findViewById(R.id.previousWeek);
-        years = (TextView) root.findViewById(R.id.year);
         term = (TextView) root.findViewById(R.id.term);
+        YMdate = (TextView) root.findViewById(R.id.YMdate);
         week = (TextView) root.findViewById(R.id.week);
         backButton.setBackgroundColor(Color.TRANSPARENT);
-
+        YMdate.setText(CurrentFirstWeekDaysMonthDay.substring(0,7));
         week.setText("第"+currentWeek+"周");
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectedWeek = currentWeek;
+                selectedFirstWeekDaysMonthDay = myDateUtils.dd2YMD(0);
+//                Log.d("date",selectedFirstWeekDaysMonthDay.substring(8));
+                dayofMonth = Integer.parseInt(CurrentFirstWeekDaysMonthDay.substring(8));
                 week.setText("第"+Integer.toString(selectedWeek)+"周");
+                YMdate.setText(selectedFirstWeekDaysMonthDay.substring(0,7));
 //                mWeekView.goToToday();
                 mWeekView.goToDay(7);
             }
@@ -88,8 +95,13 @@ public class HomeFragment extends Fragment{
         nextWeekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedWeek +=1;
+                if (selectedWeek<18){
+                    selectedWeek +=1;
+                }
+                selectedFirstWeekDaysMonthDay = myDateUtils.dd2YMD((selectedWeek-currentWeek)*7);
+                dayofMonth = Integer.parseInt(selectedFirstWeekDaysMonthDay.substring(8));
                 week.setText("第"+Integer.toString(selectedWeek)+"周");
+                YMdate.setText(selectedFirstWeekDaysMonthDay.substring(0,7));
 //                mWeekView.goToToday();
                 mWeekView.goToDay(7);
             }
@@ -97,8 +109,14 @@ public class HomeFragment extends Fragment{
         previousWeekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedWeek -=1;
+                if (selectedWeek >1){
+                    selectedWeek -=1;
+                }
+
+                selectedFirstWeekDaysMonthDay = myDateUtils.dd2YMD((selectedWeek-currentWeek)*7);
+                dayofMonth = Integer.parseInt(selectedFirstWeekDaysMonthDay.substring(8));
                 week.setText("第"+Integer.toString(selectedWeek)+"周");
+                YMdate.setText(selectedFirstWeekDaysMonthDay.substring(0,7));
 //                mWeekView.goToToday();
                 mWeekView.goToDay(7);
             }
@@ -109,8 +127,15 @@ public class HomeFragment extends Fragment{
             public List<? extends WeekViewEvent> onWeekViewLoad() {
                 List<WeekViewEvent> events = new ArrayList<>();
                 // Add some events
-                if(currentWeek==selectedWeek){
-                    for(Course c:currentWeekCourses){
+//
+                if(selectedWeek==currentWeek){
+                    showWeekCourses = dhHelper.getCurrentWeekCourses();
+                }else{
+                    showWeekCourses = dhHelper.get_one_weekCourse(selectedFirstWeekDaysMonthDay);
+                }
+
+
+                    for(Course c:showWeekCourses){
                         DayTime startTime = new DayTime(DayOfWeek.of(c.getDayofWeeks()),LocalTime.of(c.geStart2Time(),0));
                         DayTime endTime = new DayTime(startTime);
                         endTime.addHours(c.getLength());
@@ -119,13 +144,8 @@ public class HomeFragment extends Fragment{
                         event.setColor(c.getColor());
                         events.add(event);
                     }
-                }else{
-                    DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
-                    DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
-                    WeekViewEvent event = new WeekViewEvent("1","aaa\nbbb\nccc",startTime,endTime);
-                    event.setColor(Color.argb(255,0,255,0));
-                    events.add(event);
-                }
+//                int MofD = Integer.parseInt(selectedFirstWeekDaysMonthDay.substring(8));
+//                    Toast.makeText(getContext(),MofD+"",Toast.LENGTH_SHORT).show();
                 return events;
             }
         });
@@ -142,9 +162,9 @@ public class HomeFragment extends Fragment{
             @Override
             public String interpretDay(int date) {
 //                date = DayOfWeek.getValue();
-                String show = DayOfWeek.of(date).getDisplayName(TextStyle.SHORT, Locale.getDefault());
-                show += "\n";
-                show += Integer.toString(MonthDayOfThisWeek.get(date%7));
+
+                String show = DayOfWeek.of(date).getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                        +"\n" +(dayofMonth+date%7);
                 return show;
             }
             @Override
@@ -162,23 +182,23 @@ public class HomeFragment extends Fragment{
             }
         });
     }
-    private List<WeekViewEvent> myEventLoader(){
-        List<WeekViewEvent> events = new ArrayList<>();
-        // Add some events
-        if(currentWeek==selectedWeek){
-            DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
-            DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
-            WeekViewEvent event = new WeekViewEvent("0","互换性\n西朗\n呸呸呸",startTime,endTime);
-            event.setColor(Color.argb(255,255,0,0));
-            events.add(event);
-
-        }else{
-            DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
-            DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
-            WeekViewEvent event = new WeekViewEvent("1","aaa\nbbb\nccc",startTime,endTime);
-            event.setColor(Color.argb(255,0,255,0));
-            events.add(event);
-        }
-        return events;
-    }
+//    private List<WeekViewEvent> myEventLoader(){
+//        List<WeekViewEvent> events = new ArrayList<>();
+//        // Add some events
+//        if(currentWeek==selectedWeek){
+//            DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
+//            DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
+//            WeekViewEvent event = new WeekViewEvent("0","互换性\n西朗\n呸呸呸",startTime,endTime);
+//            event.setColor(Color.argb(255,255,0,0));
+//            events.add(event);
+//
+//        }else{
+//            DayTime startTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(8,0));
+//            DayTime endTime = new DayTime(DayOfWeek.SATURDAY, LocalTime.of(10,0));
+//            WeekViewEvent event = new WeekViewEvent("1","aaa\nbbb\nccc",startTime,endTime);
+//            event.setColor(Color.argb(255,0,255,0));
+//            events.add(event);
+//        }
+//        return events;
+//    }
 }
