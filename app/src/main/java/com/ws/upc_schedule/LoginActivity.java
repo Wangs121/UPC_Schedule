@@ -1,8 +1,11 @@
 package com.ws.upc_schedule;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -39,7 +42,6 @@ import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
     private int back_count = 0;
-
     private LoginViewModel loginViewModel;
     private ProgressBar loadingProgressBar;
     @Override
@@ -50,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
-        final CheckBox saveLoginCheckBox = findViewById(R.id.remember_password);
+//        final CheckBox saveLoginCheckBox = findViewById(R.id.remember_password);
         loadingProgressBar = findViewById(R.id.loading);
 //        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
 //                .get(LoginViewModel.class);
@@ -106,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser();
                     setResult(Activity.RESULT_OK);
-//                    finish();
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -166,30 +167,31 @@ public class LoginActivity extends AppCompatActivity {
             String username = ID[0];
             String password = ID[1];
             try {
-                Log.d("Cookie", "Start to connect");
-                Connection.Response Origin = Jsoup.connect(url)
-                        .method(Connection.Method.GET)
-                        .timeout(3000)
-                        .execute();
-                Log.d("Cookie", Origin.cookies().toString());
-                Connection.Response LoginResult = Jsoup.connect(url_check)
-                        .data("username", username)
-                        .data("password", password)
-                        .cookies(Origin.cookies())
-                        .ignoreContentType(true)
-                        .method(Connection.Method.POST)
-                        .timeout(3000)
-                        .execute();
-//                Log.d("Cookie", LoginResult.cookies().toString());
-                String body = LoginResult.body();
+//                Log.d("Cookie", "Start to connect");
+//                Connection.Response Origin = Jsoup.connect(url)
+//                        .method(Connection.Method.GET)
+//                        .timeout(3000)
+//                        .execute();
+//                Log.d("Cookie", Origin.cookies().toString());
+//                Connection.Response LoginResult = Jsoup.connect(url_check)
+//                        .data("username", username)
+//                        .data("password", password)
+//                        .cookies(Origin.cookies())
+//                        .ignoreContentType(true)
+//                        .method(Connection.Method.POST)
+//                        .timeout(3000)
+//                        .execute();
+////                Log.d("Cookie", LoginResult.cookies().toString());
+//                String body = LoginResult.body();
 //                Log.d("Cookie", body);
-                if (body.contains("操作成功"))  {
-                    //保存cookies
-                    LoginRepository.WriteCookies(LoginResult.cookies().get("eai-sess"),LoginResult.cookies().get("UUkey"),getApplicationContext());
-
-                    return "操作成功";
-                }
-                return body;
+//                if (body.contains("操作成功"))  {
+//                    //保存cookies
+//                    LoginRepository.WriteCookies(LoginResult.cookies().get("eai-sess"),LoginResult.cookies().get("UUkey"),getApplicationContext());
+//
+//                    return "操作成功";
+//                }
+//                return body;
+            return "操作成功";
             }catch(Exception e) {
 //                Log.d("Cookie","directly err");
 //                Log.d("Cookie",e.toString());

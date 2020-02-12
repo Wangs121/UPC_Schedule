@@ -21,6 +21,7 @@ import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.LoginActivity;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.Crawler;
+import com.ws.upc_schedule.data.Parser;
 import com.ws.upc_schedule.data.dhHelper;
 import com.ws.upc_schedule.myDateUtils;
 
@@ -48,10 +49,10 @@ public class SettingFragment extends Fragment {
 //        String show = myDateUtils.getCurrentYMD()+"\n"+myDateUtils.getFirstDayofTerm();
 //        textView.setText(show);
 //for debug-------------------
-        String a = "2019-12-10";
-//        String b = "2019-09-08";
-        textView.setText(myDateUtils.getCurrentWeek()+"");
-
+//        textView.setText(myDateUtils.getCurrentFirstWeekDaysMonthDay());
+        textView.setText("FirstDayofTerm\t"+myDateUtils.getFirstDayofTerm()+"\n"+
+                "CurrentYDM\t"+myDateUtils.getCurrentYMD()+"\n"+
+                "CSundayYDM"+myDateUtils.getCurrentFirstWeekDaysMonthDay()+"\n");
 // -------------------------------------
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

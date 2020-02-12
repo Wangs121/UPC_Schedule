@@ -10,14 +10,19 @@
     <!--   SharedPreference名   -->
     <string name="Logged_SPname">LoggedSP</string>
     <string name="Logged_SPkey">logged</string>
+    <string name="NewLogin">NewLogin</string>
+    <string name="NewLoginKey">NewLoginKey</string>
     <string name="Cookies_SPname">Cookies</string>
     <string name="Cookies_SPkey1">eai-sess</string>
     <string name="Cookies_SPkey2">UUkey</string>
     <string name="FirstDayofTerm">FirstDayofTerm</string>
     <string name="FirstDayofTermKey">FirstDayofTermKey</string>
+    <string name="Term">Term</string>
+    <string name="TermKey">TermKey</string>
+
     <!--  Navigation  -->
-    <string name="nav_header_title">课程表</string>
-    <string name="nav_header_subtitle">The best time to plant a tree is twenty years ago. The second best time is now.</string>
+    <string name="nav_header_title">U课表</string>
+    <string name="nav_header_subtitle">种下一棵树最好的时间是十年前，其次是现在。</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -27,4 +32,6 @@
     <string name="menu_logout">退出登录</string>
     <string name="menu_feedback">反馈</string>
     <string name="menu_about">关于</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

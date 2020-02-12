@@ -18,7 +18,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class dhHelper {
     private static ClassesDataBase cdbh = null;
     private static SharedPreferences FirstDayofTerm = null;
-    private static List<Course> currentWeekCourses = null;
+//    private static List<Course> currentWeekCourses = null;
 
     public static void cdbh_init(Context context){
         cdbh = new ClassesDataBase(context);
@@ -107,9 +107,7 @@ public class dhHelper {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static List<Course> getCurrentWeekCourses() {
-        if(currentWeekCourses==null){
-            currentWeekCourses = dhHelper.get_one_weekCourse(myDateUtils.getCurrentFirstWeekDaysMonthDay());
-        }
-        return currentWeekCourses;
+        return dhHelper.get_one_weekCourse(myDateUtils.getCurrentFirstWeekDaysMonthDay());
+
     }
 }

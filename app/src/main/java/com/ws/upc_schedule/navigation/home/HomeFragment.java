@@ -22,10 +22,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.Course;
 import com.ws.upc_schedule.data.dhHelper;
 import com.ws.upc_schedule.myDateUtils;
+import com.ws.upc_schedule.widget.WidgetUtils;
 
 import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalTime;
@@ -70,7 +72,9 @@ public class HomeFragment extends Fragment{
         CurrentFirstWeekDaysMonthDay = myDateUtils.getCurrentFirstWeekDaysMonthDay();
         dayofMonth = Integer.parseInt(CurrentFirstWeekDaysMonthDay.substring(8));
         showWeekCourses = dhHelper.getCurrentWeekCourses();
-//        Toast.makeText(getContext(),myDateUtils.getCurrentFirstWeekDaysMonthDay(),Toast.LENGTH_LONG).show();
+
+//        更新小部件
+        WidgetUtils.updateWidget(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mWeekView = (WeekView) root.findViewById(R.id.revolving_weekview);
         backButton = (Button) root.findViewById(R.id.back);
@@ -82,6 +86,7 @@ public class HomeFragment extends Fragment{
         backButton.setBackgroundColor(Color.TRANSPARENT);
         YMdate.setText(CurrentFirstWeekDaysMonthDay.substring(0,7));
         week.setText("第"+currentWeek+"周");
+        term.setText(myDateUtils.getYear()+"第"+ LoginRepository.getTerm(getContext())+"学期");
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,4 +13,8 @@
     <color name="black">#a0151515</color>
     <color name="white">#ffffff</color>
     <color name="invisable">#00FFFFFF</color>
+
+<!--    widget-->
+    <color name="widget_title_text_color">#eeFFFFFF</color>
+    <color name="widget_all_background">#40ffffff</color>
 </resources>

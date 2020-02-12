@@ -4,9 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.Course;
 
 
 import static android.content.Context.MODE_PRIVATE;
@@ -16,6 +15,25 @@ import static android.content.Context.MODE_PRIVATE;
  * maintains an in-memory cache of login status and user credentials information.
  */
 public class LoginRepository {
+
+//    //判断是否新登录，从而抓取课程
+//    public static boolean GetnewLogin(Context context){
+//
+//    }
+//    public static boolean setNewLogin(Context context){
+//
+//    }
+    public static String getTerm(Context context) {
+        final SharedPreferences termSP = context.getSharedPreferences(String.valueOf(R.string.Term), MODE_PRIVATE);
+        return termSP.getString(String.valueOf(R.string.TermKey),null);
+    }
+
+    public static void setTerm(Context context, String term) {
+        final SharedPreferences termSP = context.getSharedPreferences(String.valueOf(R.string.Term), MODE_PRIVATE);
+        final SharedPreferences.Editor TermdSP_edit = termSP.edit();
+        TermdSP_edit.putString(String.valueOf(R.string.TermKey),term);
+        TermdSP_edit.commit();
+    }
     public static boolean isLoggedIn(Context context) {
         final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Logged_SPname), MODE_PRIVATE);
         return loggedSP.getBoolean(String.valueOf(R.string.Logged_SPkey),false);

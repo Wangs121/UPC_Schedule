@@ -34,7 +34,7 @@ public class myDateUtils {
     private static String currentYMD;
     private static int currentWeek;
     //本周日的YMD格式
-    private static String CurrentFirstWeekDaysMonthDay = null;
+//    private static String CurrentFirstWeekDaysMonthDay = null;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void initilize(Context context){
@@ -58,12 +58,12 @@ public class myDateUtils {
         //未开学
         if(getSpecificWeek(currentYMD)<0){
             currentYMD = firstDayofTerm;
-            CurrentFirstWeekDaysMonthDay = firstDayofTerm;
+//            CurrentFirstWeekDaysMonthDay = firstDayofTerm;
         }
         //学期已结束
         if(getSpecificWeek(currentYMD) > getSpecificWeek(endDayofTerm)){
             currentYMD = endDayofTerm;
-            CurrentFirstWeekDaysMonthDay = endDayofTerm;
+//            CurrentFirstWeekDaysMonthDay = endDayofTerm;
         }
         currentWeek = getSpecificWeek(currentYMD);
 
@@ -77,18 +77,7 @@ public class myDateUtils {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static int getSpecificWeek(String yearMonthDay) {
-//        long days = 0;
-//        try{
-//            Date sp = sdf.parse(yearMonthDay);
-//            Date fd = sdf.parse(firstDayofTerm);
-//            long diff = sp.getTime()-fd.getTime();
-//            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-//            Log.d("ws",Long.toString(days));
-//            return (int)days/7;
-//        }catch (ParseException e){
-//
-//        }
-//        return 0;
+
         int days=0;
         LocalDate d1 = LocalDate.parse(yearMonthDay,formatter);
         LocalDate d2 = LocalDate.parse(firstDayofTerm,formatter);
@@ -102,11 +91,6 @@ public class myDateUtils {
     }
 
     public static int getCurrentWeek() {
-//        if(currentWeek<=0){
-//            return 1;
-//        }else if(currentWeek>18){
-//            return 18;
-//        }
         return currentWeek;
     }
 
@@ -136,18 +120,17 @@ public class myDateUtils {
 //        return 0;
 //    }
     //获得当前周的七个月日期
-    public static List<Integer> getCurrent7Days(){
-        int weekofDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        int monthOfDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        List<Integer> ret = new ArrayList<>();
-        for (int i=0;i<7;i++){
-            ret.add(monthOfDay - weekofDay+1+i);
-        }
-        return  ret;
-    }
-//    有问题
+//    public static List<Integer> getCurrent7Days(){
+//        int weekofDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+//        int monthOfDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+//        List<Integer> ret = new ArrayList<>();
+//        for (int i=0;i<7;i++){
+//            ret.add(monthOfDay - weekofDay+1+i);
+//        }
+//        return  ret;
+//    }
     public static String getCurrentFirstWeekDaysMonthDay(){
-        if(CurrentFirstWeekDaysMonthDay==null){
+//        if(CurrentFirstWeekDaysMonthDay==null){
             String YM = currentYMD.substring(0,8);
             int d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - Calendar.getInstance().get(Calendar.DAY_OF_WEEK) +1;
             if(d<10){
@@ -155,9 +138,10 @@ public class myDateUtils {
             }else {
                 YM+=d;
             }
-            CurrentFirstWeekDaysMonthDay= YM;
-        }
-        return CurrentFirstWeekDaysMonthDay;
+            return YM;
+//            return CurrentFirstWeekDaysMonthDay= YM;
+//        }
+//        return CurrentFirstWeekDaysMonthDay;
     }
 //    //偏离当前天数转换到yyyy-mm-dd格式
     public static String dd2YMD(int dw){
@@ -168,5 +152,36 @@ public class myDateUtils {
     public static String dd2YMD(String YDM,int dw){
         LocalDate d1 = LocalDate.parse(YDM,formatter);
         return d1.plusDays(dw).format(formatter);
+    }
+
+
+    //用来判断学年
+    public static String getYear(){
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        int year = Integer.parseInt(sdf.format(now));
+        sdf = new SimpleDateFormat("MM");
+        int month = Integer.parseInt(sdf.format(now));
+        //八月前为上一学年
+        if(month<=8){
+            return (year-1)+"-"+year;
+        }else {
+            return year +"-"+(year+1);
+        }
+    }
+    //用来判断学期
+    public static String getTerm(String yearMonthDay) {
+        int days=0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        String YDM = sdf.format(now);
+        LocalDate d1 = LocalDate.parse(yearMonthDay,formatter);
+        LocalDate d2 = LocalDate.parse(YDM,formatter);
+        days = (int)ChronoUnit.DAYS.between(d2, d1);
+        if(days==0){
+            return "1";
+        }else{
+            return "2";
+        }
     }
 }
