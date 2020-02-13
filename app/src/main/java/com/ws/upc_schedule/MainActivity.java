@@ -12,7 +12,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.ws.upc_schedule.Login.LoginRepository;
-import com.ws.upc_schedule.data.dhHelper;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -38,24 +37,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(login);
             finish();
         }else{
-            //初始化数据库
-            dhHelper.cdbh_init(getApplicationContext());
-            //获得当前学期第一天
-            myDateUtils.initilize(getApplicationContext());
-
             //navigation 初始化
             setContentView(R.layout.activity_main);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(),"ccc",Toast.LENGTH_SHORT).show();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
 
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
@@ -82,13 +68,5 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//        if(LoginRepository.isLoggedIn(getApplicationContext()) && dhHelper.get_all_data().getCount()<=0){
-//            Toast.makeText(getApplicationContext(),"数据库为空，正在自动更新",Toast.LENGTH_SHORT).show();
-//            new Crawler().execute(getApplicationContext());
-//        }
-//    }
 
 }
