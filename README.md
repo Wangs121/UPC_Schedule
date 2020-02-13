@@ -2,10 +2,6 @@
 
 通过抓取微信企业号中的课表信息 **实现在桌面添加课表widget**从而避免频繁查课表或将课表设为桌面壁纸
 
-# 已知bug
-
-* 每一次登陆成功后程序都会停止运行
-
 # 项目进度
 
 #### 2020.2.13
@@ -13,8 +9,8 @@
 * 只保留了xml文件，数据处理部分全部移除
 * 优化了课程信息保存内容，可以减少很多的计算，修改了：
   * INDEX : 周-天-节,ww-d-cc
-
 * 优化了登录结构，调用的class都单独抽出来，减少与其他部分的联系
+* 修复了每次登录都会闪退一下的bug (`AsyncTask` : `UI thread` and `background thread`  ) 
 
 #### 2020.2.12
 
@@ -145,4 +141,7 @@ UML一直没耐心学，自己随便画的:cry:
 
 [Android Intents - Tutorial](https://www.vogella.com/tutorials/AndroidIntent/article.html)
 
-[Start new Activity and finish current one in Android? [duplicate\]](https://stackoverflow.com/questions/11308198/start-new-activity-and-finish-current-one-in-android)
+[Start new Activity and finish current one in Android? duplicate](https://stackoverflow.com/questions/11308198/start-new-activity-and-finish-current-one-in-android)
+
+[AsyncTask](https://developer.android.com/reference/android/os/AsyncTask)
+
