@@ -2,6 +2,7 @@ package com.ws.upc_schedule.navigation.setting;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.LoginActivity;
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.dbHelper;
 
 
 public class SettingFragment extends Fragment {
@@ -45,10 +47,29 @@ public class SettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        show_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewData();
+            }
+        });
         return root;
     }
 
-
+    public void viewData(){
+        Cursor data = dbHelper.getAllData();
+        StringBuffer stringBuffer = new StringBuffer();
+        while (data.moveToNext()){
+            stringBuffer.append("\nINDEX: " + data.getString(0));
+            stringBuffer.append("\nNAME: " + data.getString(1));
+            stringBuffer.append("\nLOCATION: " + data.getString(2));
+            stringBuffer.append("\nTEACHER: " + data.getString(3));
+            stringBuffer.append("\nTOTALLENGTH: " + data.getString(4));
+//            stringBuffer.append("\nPassword: " + data.getString(2) + "\n");
+        }
+        dialog("Data", stringBuffer.toString());
+    }
     public void dialog(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(message);

@@ -98,7 +98,7 @@ public class ClassesDataBase extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME, "INDEXs = ?", new String[] {index});
     }
 
-    public Integer EmptyData(){
+    public Integer clearData(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, null, null);
     }

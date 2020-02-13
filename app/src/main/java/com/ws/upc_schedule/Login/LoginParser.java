@@ -2,6 +2,7 @@ package com.ws.upc_schedule.Login;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -22,7 +23,7 @@ public class LoginParser {
     private static String firstDayofTerm = null;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String findTerm(Document doc, Context context) {
+    public static String findTerm(Document doc) {
         Gson g = new Gson();
         String con = doc.body().text();
         JsonObject table;
@@ -35,12 +36,13 @@ public class LoginParser {
         table = g.fromJson(buffer, JsonObject.class);
         weeks = table.get("weekdays");
         weekdays = g.fromJson(weeks, String[].class);//得到日期
+        Log.d("Login","第一天为："+weekdays[0]);
         String term = LoginDateUtils.getTerm(weekdays[0]);
-        LoginRepository.setTerm(context, term);
+
         return term;
     }
 
-    public static void parse(String[] strings, Context context, LogindbHelper logindbHelper) {
+    public static void parse(String string,int week, Context context, LogindbHelper logindbHelper) {
         //解析
         Gson g = new Gson();
 //        String con = doc.body().text();
@@ -48,7 +50,7 @@ public class LoginParser {
         JsonObject table;
         JsonElement d;
         String buffer;
-        table = g.fromJson(strings[0], JsonObject.class);//转换为JsonObject
+        table = g.fromJson(string, JsonObject.class);//转换为JsonObject
         d = table.get("d");
         buffer = g.toJson(d);//转换为String
         table = g.fromJson(buffer, JsonObject.class);
@@ -59,19 +61,18 @@ public class LoginParser {
         Type collectionType = new TypeToken<Collection<ClassesContainer>>() {
         }.getType();
         Collection<ClassesContainer> classes = g.fromJson(buffer, collectionType);
-        int i = 0;
         String weeks;
-        if (Integer.parseInt(strings[1]) < 10) {
-            weeks = "0" + Integer.parseInt(strings[1]) + "-";
+        if (week < 10) {
+            weeks = "0" + week + "-";
         } else {
-            weeks = strings[1] + "-";
+            weeks = week + "-";
         }
         if (firstDayofTerm == null) {
             JsonObject t;
             JsonElement w;
             String b;
             String[] weekdays;
-            t = g.fromJson(strings[0], JsonObject.class);//转换为JsonObject
+            t = g.fromJson(string, JsonObject.class);//转换为JsonObject
             d = t.get("d");
             b = g.toJson(d);//转换为String
             t = g.fromJson(b, JsonObject.class);
@@ -154,7 +155,6 @@ public class LoginParser {
                     logindbHelper.insertData(weeks + cm.get_weekday() + "-12", cm.get_course_name(), cm.get_location(), cm.get_teacher(), cm.get_totalLength());
                 }
             }
-            i += 1;
         }
     }
 }

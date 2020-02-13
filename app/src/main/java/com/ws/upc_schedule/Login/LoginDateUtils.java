@@ -1,6 +1,7 @@
 package com.ws.upc_schedule.Login;
 
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -39,6 +40,7 @@ public class LoginDateUtils {
         LocalDate d1 = LocalDate.parse(yearMonthDay, formatter);
         LocalDate d2 = LocalDate.parse(YDM, formatter);
         days = (int) ChronoUnit.DAYS.between(d2, d1);
+        Log.d("Login","与现在时间差值为:"+days);
         if (days == 0) {
             return "1";
         } else {

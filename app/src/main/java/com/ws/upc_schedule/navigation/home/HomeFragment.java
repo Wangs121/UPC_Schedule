@@ -17,7 +17,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.dateUtils;
+import com.ws.upc_schedule.data.dbHelper;
 import com.ws.upc_schedule.widget.WidgetUtils;
 
 import org.threeten.bp.DayOfWeek;
@@ -41,11 +44,14 @@ public class HomeFragment extends Fragment{
     private ImageButton nextWeekButton;
     private ImageButton previousWeekButton;
 
+    private int currentWeek ;
+    private int selectedWeek;
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
+        //初始化数据库
+        dbHelper.initilize(getContext());
 //        更新小部件
         WidgetUtils.updateWidget(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -57,7 +63,10 @@ public class HomeFragment extends Fragment{
         YMdate = (TextView) root.findViewById(R.id.YMdate);
         week = (TextView) root.findViewById(R.id.week);
         backButton.setBackgroundColor(Color.TRANSPARENT);
-
+        term.setText("第"+LoginRepository.getTerm(getContext())+"学期");
+        currentWeek = dateUtils.getCurrentWeek();
+        selectedWeek = currentWeek;
+        week.setText("第"+currentWeek+"周");
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
