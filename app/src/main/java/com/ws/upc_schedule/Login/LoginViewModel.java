@@ -13,11 +13,12 @@ public class LoginViewModel extends ViewModel {
     public LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
     }
+
     public LiveData<LoginResult> getLoginResult() {
         return loginResult;
     }
 
-    public void setLoginResult(Result<String> result){
+    public void setLoginResult(Result<String> result) {
         if (result instanceof Result.Success) {
             loginResult.setValue(new LoginResult(R.string.login_success));
         } else {
@@ -35,6 +36,7 @@ public class LoginViewModel extends ViewModel {
             loginFormState.setValue(new LoginFormState(true));
         }
     }
+
     // A placeholder username validation check
     private boolean isUserNameValid(String username) {
         if (username == null) {

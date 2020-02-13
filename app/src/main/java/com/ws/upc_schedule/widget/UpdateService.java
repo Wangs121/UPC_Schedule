@@ -11,10 +11,7 @@ import androidx.annotation.RequiresApi;
 
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.Course;
-import com.ws.upc_schedule.data.dhHelper;
-import com.ws.upc_schedule.myDateUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateService extends RemoteViewsService {
@@ -31,8 +28,8 @@ public class UpdateService extends RemoteViewsService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initData() {
-        //TODO
-        mCourses = dhHelper.getCurrentWeekCourses();
+        //TODO 添加当前课程
+//        mCourses = dhHelper.getCurrentWeekCourses();
 
     }
 

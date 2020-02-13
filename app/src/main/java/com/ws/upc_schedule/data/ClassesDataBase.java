@@ -102,4 +102,5 @@ public class ClassesDataBase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, null, null);
     }
+
 }
