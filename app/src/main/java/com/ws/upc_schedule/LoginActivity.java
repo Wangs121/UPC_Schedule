@@ -295,10 +295,12 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void result){
             super.onPostExecute(result);
             //结束此activity
-            setResult(Activity.RESULT_OK);
+//            setResult(Activity.RESULT_OK);
+            logindbHelper.close();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            finish();
             startActivity(intent);
-            finish();
+
         }
     }
 }

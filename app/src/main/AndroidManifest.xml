@@ -27,7 +27,7 @@
                 android:resource="@xml/schedule_widget_info" />
         </receiver>
 
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity" android:noHistory="true"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

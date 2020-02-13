@@ -11,7 +11,10 @@ public class LogindbHelper {
         this.classesDataBase = new ClassesDataBase(context);
     }
 
-    private void insertData(String index, String name, String location, String teacher, int totallength) {
+    public void insertData(String index, String name, String location, String teacher, int totallength) {
         classesDataBase.insertData(index, name, location, teacher, totallength);
+    }
+    public void close(){
+        classesDataBase.close();
     }
 }

@@ -1,6 +1,7 @@
 package com.ws.upc_schedule.navigation.setting;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.ws.upc_schedule.Login.LoginRepository;
+import com.ws.upc_schedule.LoginActivity;
 import com.ws.upc_schedule.R;
 
 
@@ -34,6 +37,14 @@ public class SettingFragment extends Fragment {
         final Button show_all = root.findViewById(R.id.show);
         final TextView textView = root.findViewById(R.id.CookieView);
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginRepository.logout(getContext());
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 
