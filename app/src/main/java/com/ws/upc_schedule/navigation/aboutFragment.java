@@ -1,4 +1,4 @@
-package com.ws.upc_schedule.navigation.about;
+package com.ws.upc_schedule.navigation;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.ws.upc_schedule.BuildConfig;
 import com.ws.upc_schedule.R;
 
 public class aboutFragment extends Fragment {
 
-    private aboutViewModel aboutViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        aboutViewModel =
-                ViewModelProviders.of(this).get(aboutViewModel.class);
         View root = inflater.inflate(R.layout.fragment_about, container, false);
-        final TextView textView = root.findViewById(R.id.text_send);
-        aboutViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        final TextView version = root.findViewById(R.id.version);
+        version.setText(BuildConfig.VERSION_NAME);
         return root;
     }
 }

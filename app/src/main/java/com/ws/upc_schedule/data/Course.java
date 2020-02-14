@@ -6,7 +6,6 @@ import androidx.annotation.ColorInt;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -106,6 +105,12 @@ public class Course {
         return teacher;
     }
     private static @ColorInt int randomColor(){
-        return Color.argb(255,random.nextInt(256),random.nextInt(256),random.nextInt(256));
+        int r,g,b;
+        do{
+            r= random.nextInt(256);
+            g= random.nextInt(256);
+            b= random.nextInt(256);
+        }while (r+g+b>600);
+        return Color.argb(255,r,g,b);
     }
 }
