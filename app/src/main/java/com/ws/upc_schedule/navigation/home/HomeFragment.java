@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +20,20 @@ import androidx.fragment.app.Fragment;
 
 import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.Course;
 import com.ws.upc_schedule.data.dateUtils;
 import com.ws.upc_schedule.data.dbHelper;
 import com.ws.upc_schedule.widget.WidgetUtils;
 
 import org.threeten.bp.DayOfWeek;
+import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.TextStyle;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import me.jlurena.revolvingweekview.DayTime;
 import me.jlurena.revolvingweekview.WeekView;
 import me.jlurena.revolvingweekview.WeekViewEvent;
 
@@ -46,6 +50,12 @@ public class HomeFragment extends Fragment{
 
     private int currentWeek ;
     private int selectedWeek;
+
+    private String currentYMD;
+    private String selectedYMD;
+    private int[] weekMonthDays;
+    private List<Course> courses;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,26 +73,51 @@ public class HomeFragment extends Fragment{
         YMdate = (TextView) root.findViewById(R.id.YMdate);
         week = (TextView) root.findViewById(R.id.week);
         backButton.setBackgroundColor(Color.TRANSPARENT);
-        term.setText("第"+LoginRepository.getTerm(getContext())+"学期");
+
         currentWeek = dateUtils.getCurrentWeek();
         selectedWeek = currentWeek;
+        currentYMD = dateUtils.getFirstDayofWeek(currentWeek);
+        selectedYMD = currentYMD;
+        weekMonthDays = dateUtils.getWeekMonthDays(currentYMD);
+        courses = dbHelper.getCurrentCourses();
+
+
+        term.setText(dateUtils.getStuYear());
         week.setText("第"+currentWeek+"周");
+        YMdate.setText(currentYMD.substring(0,7));
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                selectedWeek = currentWeek;
+                selectedYMD = currentYMD;
+                weekMonthDays = dateUtils.getWeekMonthDays(currentYMD);
+                courses = dbHelper.getCurrentCourses();
+                refresh();
             }
         });
         nextWeekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (selectedWeek<18){
+                    selectedWeek +=1;
+                }
+                selectedYMD = dateUtils.getFirstDayofWeek(selectedWeek);
+                weekMonthDays = dateUtils.getWeekMonthDays(selectedYMD);
+                courses = dbHelper.getOneWeekCoueses(selectedWeek);
+                refresh();
             }
         });
         previousWeekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (selectedWeek>1){
+                    selectedWeek -=1;
+                }
+                selectedYMD = dateUtils.getFirstDayofWeek(selectedWeek);
+                weekMonthDays = dateUtils.getWeekMonthDays(selectedYMD);
+                courses = dbHelper.getOneWeekCoueses(selectedWeek);
+                refresh();
             }
         });
         mWeekView.setWeekViewLoader(new WeekView.WeekViewLoader() {
@@ -96,16 +131,22 @@ public class HomeFragment extends Fragment{
 //                    showWeekCourses = dhHelper.get_one_weekCourse(selectedFirstWeekDaysMonthDay);
 //                }
 //
-//
-//                for(Course c:showWeekCourses){
-//                    DayTime startTime = new DayTime(DayOfWeek.of(c.getDayofWeeks()),LocalTime.of(c.geStart2Time(),0));
-//                    DayTime endTime = new DayTime(startTime);
-//                    endTime.addHours(c.getLength());
-//                    WeekViewEvent event = new WeekViewEvent("0",
-//                            c.getName()+"\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
-//                    event.setColor(c.getColor());
-//                    events.add(event);
-//                }
+
+                for(Course c:courses){
+                    int day = c.getDay();
+                    if (day==0){
+                        day=7;
+                    }
+//                    Log.d("Courses","week before"+c.getDay());
+//                    Log.d("Courses","week after"+week);
+                    DayTime startTime = new DayTime(DayOfWeek.of(day), LocalTime.of(c.geStart2Time(),0));
+                    DayTime endTime = new DayTime(startTime);
+                    endTime.addHours(c.getLength());
+                    WeekViewEvent event = new WeekViewEvent("0",
+                            c.getName()+"\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
+                    event.setColor(c.getColor());
+                    events.add(event);
+                }
 
                 return events;
             }
@@ -129,8 +170,8 @@ public class HomeFragment extends Fragment{
             public String interpretDay(int date) {
 //                date = DayOfWeek.getValue();
 
-                String show = DayOfWeek.of(date).getDisplayName(TextStyle.SHORT, Locale.getDefault());
-//                        +"\n" +(dayofMonth+date%7);
+                String show = DayOfWeek.of(date).getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                        +"\n" +(weekMonthDays[date%7]);
                 return show;
             }
             @Override
@@ -161,5 +202,10 @@ public class HomeFragment extends Fragment{
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+    public void refresh(){
+        mWeekView.goToDay(7);
+        this.week.setText("第"+selectedWeek+"周");
+        YMdate.setText(selectedYMD.substring(0,7));
     }
 }
