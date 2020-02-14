@@ -1,11 +1,10 @@
-package com.ws.upc_schedule.navigation.home;
+package com.ws.upc_schedule.navigation;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.Course;
 import com.ws.upc_schedule.data.dateUtils;
@@ -62,7 +60,7 @@ public class HomeFragment extends Fragment{
 
         //初始化数据库
         dbHelper.initilize(getContext());
-//        更新小部件
+        //更新小部件
         WidgetUtils.updateWidget(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mWeekView = (WeekView) root.findViewById(R.id.revolving_weekview);

@@ -1,4 +1,4 @@
-package com.ws.upc_schedule.navigation.setting;
+package com.ws.upc_schedule.navigation;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,7 +49,6 @@ public class SettingFragment extends Fragment {
 
     private ProgressBar progressBar;
 
-    private SettingViewModel settingViewModel;
     private List<String> courses = new ArrayList<>();
     private String year;
     private String term = null;
@@ -59,8 +58,7 @@ public class SettingFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        settingViewModel =
-                ViewModelProviders.of(this).get(SettingViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
         final Button logout = root.findViewById(R.id.Logout);
         final Button update = root.findViewById(R.id.update);

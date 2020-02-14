@@ -1,4 +1,4 @@
-package com.ws.upc_schedule.navigation.feedback;
+package com.ws.upc_schedule.navigation;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -19,12 +19,10 @@ import com.ws.upc_schedule.R;
 
 public class FeedbackFragment extends Fragment {
 
-    private FeedbackViewModel feedbackViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        feedbackViewModel =
-                ViewModelProviders.of(this).get(FeedbackViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_feedback, container, false);
         final Button launchQQButton = root.findViewById(R.id.launchQQ);
         final Button launchGitHub = root.findViewById(R.id.launchGithub);

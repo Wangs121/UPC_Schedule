@@ -7,26 +7,26 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.ws.upc_schedule.navigation.home.HomeFragment"
+        android:name="com.ws.upc_schedule.navigation.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_setting"
-        android:name="com.ws.upc_schedule.navigation.setting.SettingFragment"
+        android:name="com.ws.upc_schedule.navigation.SettingFragment"
         android:label="@string/menu_setting"
         tools:layout="@layout/fragment_setting" />
 
 
     <fragment
         android:id="@+id/nav_feedback"
-        android:name="com.ws.upc_schedule.navigation.feedback.FeedbackFragment"
+        android:name="com.ws.upc_schedule.navigation.FeedbackFragment"
         android:label="@string/menu_feedback"
         tools:layout="@layout/fragment_feedback" />
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.ws.upc_schedule.navigation.about.aboutFragment"
+        android:name="com.ws.upc_schedule.navigation.aboutFragment"
         android:label="@string/menu_about"
         tools:layout="@layout/fragment_about" />
 </navigation>
