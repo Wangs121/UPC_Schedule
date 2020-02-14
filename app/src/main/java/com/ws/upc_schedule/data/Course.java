@@ -32,7 +32,7 @@ public class Course {
     private int start;
 
 
-    Course(String index,String name,String location,String teacher, int length){
+    public Course(String index, String name, String location, String teacher, int length){
 //        this.index = index;
         this.name = name;
         this.location = location;

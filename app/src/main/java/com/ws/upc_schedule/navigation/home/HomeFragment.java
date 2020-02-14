@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment{
                     DayTime endTime = new DayTime(startTime);
                     endTime.addHours(c.getLength());
                     WeekViewEvent event = new WeekViewEvent("0",
-                            c.getName()+"\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
+                            c.getName()+"\n\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
                     event.setColor(c.getColor());
                     events.add(event);
                 }
