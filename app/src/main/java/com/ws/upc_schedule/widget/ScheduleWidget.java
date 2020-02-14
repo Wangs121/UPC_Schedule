@@ -12,6 +12,7 @@ import android.widget.RemoteViews;
 import androidx.annotation.RequiresApi;
 
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.dateUtils;
 
 /**
  * Implementation of App Widget functionality.
@@ -61,8 +62,8 @@ public class ScheduleWidget extends AppWidgetProvider {
         remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_all);
 
 //        int month = TimeUtils.getNowMonth();
-//        int week = myDateUtils.getCurrentWeek();
-        int week = 1;
+        int week = dateUtils.getCurrentWeek();
+//        int week = 1;
         remoteViews.setTextViewText(R.id.tv_month,week+"\n周");
 
         Intent intent = new Intent(context, UpdateService.class);
