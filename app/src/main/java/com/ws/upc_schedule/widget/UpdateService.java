@@ -229,7 +229,7 @@ public class UpdateService extends RemoteViewsService {
     private Course getCourseByRowCol(int row, int col) {
         Course result = null;
         for (Course course : mCourses) {
-            if (course.getDayofWeek() == row && course.getStart() == col) {
+            if (course.getWeek() == row && course.getStart() == col) {
                 result = course;
             }
         }
