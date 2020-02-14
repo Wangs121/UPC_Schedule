@@ -1,5 +1,6 @@
 package com.ws.upc_schedule.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -11,6 +12,7 @@ import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
 
+import com.ws.upc_schedule.MainActivity;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.dateUtils;
 
@@ -72,12 +74,13 @@ public class ScheduleWidget extends AppWidgetProvider {
         //配置适配器
         remoteViews.setRemoteAdapter(R.id.widget_list, intent);
 
-//        Intent intent1 = new Intent(context, MainActivity.class);
-//        PendingIntent pendingIntentTemplate = PendingIntent.getActivity(
-//                context, 1, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent1 = new Intent(context, MainActivity.class);
+
+        PendingIntent pendingIntentTemplate = PendingIntent.getActivity(
+                context, 1, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 //
 //        ////拼接PendingIntent
-//        remoteViews.setPendingIntentTemplate(R.id.widget_list, pendingIntentTemplate);
+        remoteViews.setPendingIntentTemplate(R.id.widget_list, pendingIntentTemplate);
 
         //更新remoteViews
         appWidgetManager.updateAppWidget(thisWidget, remoteViews);
