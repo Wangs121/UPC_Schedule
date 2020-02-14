@@ -1,23 +1,38 @@
-# 项目介绍
+# 软件介绍
 
-通过抓取微信企业号中的课表信息 **实现在桌面添加课表widget**从而避免频繁查课表或将课表设为桌面壁纸
+仅适用于 `中国石油大学(华东)` 的一款课程表软件，支持添加小部件至桌面
 
-# 项目进度
+现已上架[酷安网](https://coolapk.com/apk/com.ws.upc_schedule)
+
+![home](pic-home.png) ![widget](pic-widget.png) ![navigation](pic-navigation.png) ![setting](pic-setting.png) 
+
+![pic-video](pic-video.gif)
+
+
+
+# 项目进度 --基本功能已完成
 
 #### 2020.2.14
 
 * 能显示各周课程信息在主页
+
 * 小部件添加成功，正常工作
+
 * 修改设置中的内容为：
   * 查看数据库全部课程数据
   * 更新课程数据
   * 退出登录
+  
 * 完成反馈页面
   * 使用qq联系作者
   * 在酷安评论
   * 在GitHub上`submit new issue`
+  
 * 完成简单的关于页面
+
 * 优化课程颜色，避免与文字颜色相似
+
+  
 
 #### 2020.2.13
 
