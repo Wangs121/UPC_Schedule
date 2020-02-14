@@ -11,7 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="查看数据库所有课程"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        tools:ignore="MissingConstraints"
+        />
     <Button
         android:id="@+id/update"
         android:layout_width="match_parent"
@@ -19,7 +23,10 @@
         android:text="更新课程信息"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/show" />
+        app:layout_constraintTop_toBottomOf="@+id/show"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
     <Button
         android:id="@+id/Logout"
         android:layout_width="match_parent"
@@ -28,7 +35,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update" />
+        app:layout_constraintTop_toBottomOf="@+id/update"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
