@@ -30,6 +30,12 @@ public class LoginRepository {
         return termSP.getString(String.valueOf(R.string.TermKey), null);
     }
 
+    public static void clearTerm(Context context) {
+        final SharedPreferences termSP = context.getSharedPreferences(String.valueOf(R.string.Term), MODE_PRIVATE);
+        final SharedPreferences.Editor TermdSP_edit = termSP.edit();
+        TermdSP_edit.clear();
+        TermdSP_edit.commit();
+    }
     public static void setTerm(Context context, String term) {
         final SharedPreferences termSP = context.getSharedPreferences(String.valueOf(R.string.Term), MODE_PRIVATE);
         final SharedPreferences.Editor TermdSP_edit = termSP.edit();

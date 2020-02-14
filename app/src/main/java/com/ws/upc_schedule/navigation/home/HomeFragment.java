@@ -160,6 +160,9 @@ public class HomeFragment extends Fragment{
         setupDateTimeInterpreter();
         return root;
     }
+
+
+
     /**
      * Set up a date time interpreter which will show short date values when in week view and long
      * date values otherwise.

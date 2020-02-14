@@ -39,8 +39,10 @@ public class dbHelper {
     }
 
     public static void close() {
-        dbHelper.close();
-        dbHelper = null;
+        if (dbHelper != null) {
+            dbHelper.close();
+            dbHelper = null;
+        }
     }
 
     //获取week周的所有课程
@@ -78,8 +80,8 @@ public class dbHelper {
         return courses;
     }
 
-    public static List<Course> getCurrentCourses(){
-        if(currentCourses == null){
+    public static List<Course> getCurrentCourses() {
+        if (currentCourses == null) {
             currentCourses = getOneWeekCoueses(dateUtils.getCurrentWeek());
         }
         return currentCourses;

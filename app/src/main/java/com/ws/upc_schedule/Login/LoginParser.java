@@ -37,9 +37,10 @@ public class LoginParser {
         weeks = table.get("weekdays");
         weekdays = g.fromJson(weeks, String[].class);//得到日期
         Log.d("Login","第一天为："+weekdays[0]);
-        String term = LoginDateUtils.getTerm(weekdays[0]);
-
-        return term;
+        if(weekdays[0].equals("")){
+            return "0";
+        }
+        return LoginDateUtils.getTerm(weekdays[0]);
     }
 
     public static void parse(String string,int week, Context context, LogindbHelper logindbHelper) {
