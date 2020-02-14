@@ -11,7 +11,9 @@ import androidx.annotation.RequiresApi;
 
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.Course;
+import com.ws.upc_schedule.data.dbHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateService extends RemoteViewsService {
@@ -29,7 +31,7 @@ public class UpdateService extends RemoteViewsService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initData() {
         //TODO 添加当前课程
-//        mCourses = dhHelper.getCurrentWeekCourses();
+        mCourses = dbHelper.getCurrentCourses();
 
     }
 
@@ -97,7 +99,7 @@ public class UpdateService extends RemoteViewsService {
                 bigRemoteViews.addView(R.id.item_node_group, nodeRemoteViews);
             }
 
-            for (int row = 0; row <= 7; row++) {
+            for (int row = 1; row <= 7; row++) {
                 for (int col = 1; col <= maxNodeSize; col++) {
                     Course course = getCourseByRowCol(row, col);
                     RemoteViews dayRemoteViews = null;
@@ -229,7 +231,7 @@ public class UpdateService extends RemoteViewsService {
     private Course getCourseByRowCol(int row, int col) {
         Course result = null;
         for (Course course : mCourses) {
-            if (course.getDayofWeek() == row && course.getStart() == col) {
+            if ((course.getDay()+1) == row && course.getStart() == col) {
                 result = course;
             }
         }

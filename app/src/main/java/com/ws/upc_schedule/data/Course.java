@@ -19,46 +19,41 @@ public class Course {
     private static Calendar c = Calendar.getInstance();
 
 
-    private String index;
+//    private String index;
     private String name;
     private String location;
     private String teacher;
     private int length;
 
-    private String yearMonthDay;
 
-    private int dayOfWeek;
+    private int week;
     private int color ;
-    private int dayofMonth;
+    private int day;
     private int start;
 
-//    private int end;
 
-    Course(String index,String name,String location,String teacher, int length){
-        this.index = index;
+    public Course(String index, String name, String location, String teacher, int length){
+//        this.index = index;
         this.name = name;
         this.location = location;
         this.teacher = teacher;
         this.length = length;
-        this.yearMonthDay = index.substring(0,11);
-        this.dayofMonth = Integer.parseInt(index.substring(5,7));
-        this.start = Integer.parseInt(index.substring(11,13));
-        try{
-            c.setTime(sdf.parse(yearMonthDay));
-            this.dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        }catch (Exception e){
+        this.week = Integer.parseInt(index.substring(0,2));
+        this.day = Integer.parseInt(index.substring(3,4));
+        this.start = Integer.parseInt(index.substring(5));
 
-        }
         if(colors.get(name)==null){
             colors.put(name,randomColor());
         }
         this.color = colors.get(name);
     }
-    public int getDayofWeek(){
-        return dayOfWeek;
+
+    public int getWeek() {
+        return week;
     }
-    public int getDayofWeeks(){
-        return dayOfWeek-1;
+
+    public int getDay() {
+        return day;
     }
 
     public int getLength(){
@@ -109,9 +104,6 @@ public class Course {
     }
     public String getTeacher(){
         return teacher;
-    }
-    public int getDayofMonth(){
-        return dayofMonth;
     }
     private static @ColorInt int randomColor(){
         return Color.argb(255,random.nextInt(256),random.nextInt(256),random.nextInt(256));
