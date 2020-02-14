@@ -26,11 +26,12 @@
         app:layout_constraintTop_toBottomOf="@id/icon" />
 
     <TextView
+        android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:shadowColor="@color/black"
-        android:text="@string/_0_9_beta"
+        android:text=""
         app:layout_constraintTop_toBottomOf="@+id/appname"
         tools:ignore="MissingConstraints" />
 
