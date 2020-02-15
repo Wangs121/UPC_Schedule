@@ -23,13 +23,16 @@ public class ScheduleWidget extends AppWidgetProvider {
 
     private ComponentName thisWidget;
     private RemoteViews remoteViews;
+    private static final String ACTION_SIMPLEAPPWIDGET = "ACTION_BROADCASTWIDGETSAMPLE";
 
     /** AppWidgetProvider 继承自 BroadcastReceiver */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
-//        Log.d(this.toString(), "onReceive");
 //        Log.d("widget","on Receive");
+        if (ACTION_SIMPLEAPPWIDGET.equals(intent.getAction())) {
+            updateAction(context);
+        }
         if (intent != null && intent.getAction() != null) {
             Log.e(this.toString(), intent.getAction());
             if (intent.getAction().equals("com.ws.upc_schedule.action.APPWIDGET_UPDATE")) {
@@ -82,6 +85,12 @@ public class ScheduleWidget extends AppWidgetProvider {
 //        ////拼接PendingIntent
         remoteViews.setPendingIntentTemplate(R.id.widget_list, pendingIntentTemplate);
 
+        //点击标题栏更新wigdet
+        Intent update = new Intent(context,ScheduleWidget.class);
+        update.setAction(ACTION_SIMPLEAPPWIDGET);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, update,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteViews.setOnClickPendingIntent(R.id.widget_all,pendingIntent);
         //更新remoteViews
         appWidgetManager.updateAppWidget(thisWidget, remoteViews);
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);

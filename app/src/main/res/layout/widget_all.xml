@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:background="@color/widget_all_background"
     android:orientation="vertical"
-    android:paddingRight="6dp">
+    android:paddingRight="6dp"
+    android:id="@+id/widget_all">
 
     <LinearLayout
         android:layout_width="match_parent"
