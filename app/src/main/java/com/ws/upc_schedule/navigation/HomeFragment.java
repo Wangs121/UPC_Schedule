@@ -205,6 +205,11 @@ public class HomeFragment extends Fragment{
         alertDialog.show();
     }
     public void refresh(){
+        if(selectedWeek != currentWeek){
+            term.setText("点击返回");
+        }else {
+            term.setText(dateUtils.getStuYear());
+        }
         mWeekView.goToDay(7);
         this.week.setText("第"+selectedWeek+"周");
         YMdate.setText(selectedYMD.substring(0,7));
