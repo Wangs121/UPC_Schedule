@@ -26,16 +26,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="日"
-            android:textColor="@color/widget_title_text_color"
-            android:textSize="12sp" />
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
             android:text="一"
             android:textColor="@color/widget_title_text_color"
             android:textSize="12sp" />
@@ -90,6 +80,16 @@
             android:textColor="@color/widget_title_text_color"
             android:textSize="12sp" />
 
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日"
+            android:textColor="@color/widget_title_text_color"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
     <ListView
@@ -99,7 +99,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:cacheColorHint="#00000000"
-        android:scrollbars="none"
-        />
+        android:scrollbars="none" />
 
 </LinearLayout>
