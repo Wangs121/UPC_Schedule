@@ -71,6 +71,9 @@ public class SettingFragment extends Fragment {
                 dbHelper.clear();
                 dbHelper.close();
                 LoginRepository.logout(getContext());
+                LoginRepository.clearTerm(getContext());
+                LoginRepository.clearCookies(getContext());
+                LoginRepository.clearFirstDayofTerm(getContext());
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
             }

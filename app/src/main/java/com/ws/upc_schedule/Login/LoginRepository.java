@@ -13,9 +13,16 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class LoginRepository {
 
+    public static void clearFirstDayofTerm(Context context) {
+        final SharedPreferences daySP = context.getSharedPreferences(String.valueOf(R.string.FirstDayofTerm), MODE_PRIVATE);
+        final SharedPreferences.Editor daySP_edit = daySP.edit();
+        daySP_edit.clear();
+        daySP_edit.commit();
+    }
+
     public static String getFirstDayofTerm(Context context) {
-        final SharedPreferences termSP = context.getSharedPreferences(String.valueOf(R.string.FirstDayofTerm), MODE_PRIVATE);
-        return termSP.getString(String.valueOf(R.string.FirstDayofTermKey), "2019-09-09");
+        final SharedPreferences daySP = context.getSharedPreferences(String.valueOf(R.string.FirstDayofTerm), MODE_PRIVATE);
+        return daySP.getString(String.valueOf(R.string.FirstDayofTermKey), "2019-09-09");
     }
 
     public static void setFirstDayofTerm(Context context, String term) {
@@ -62,20 +69,25 @@ public class LoginRepository {
         LoggedSP_edit.commit();
         //清除cookies
     }
-
+    public static void clearCookies( Context context) {
+        final SharedPreferences CookiesSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
+        final SharedPreferences.Editor CookiesSP_edit = CookiesSP.edit();
+        CookiesSP_edit.clear();
+        CookiesSP_edit.commit();
+    }
     public static void WriteCookies(String eai_sess, String UUkey, Context context) {
-        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
-        final SharedPreferences.Editor LoggedSP_edit = loggedSP.edit();
-        LoggedSP_edit.putString(String.valueOf(R.string.Cookies_SPkey1), eai_sess);
-        LoggedSP_edit.putString(String.valueOf(R.string.Cookies_SPkey2), UUkey);
-        LoggedSP_edit.commit();
+        final SharedPreferences CookiesSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
+        final SharedPreferences.Editor CookiesSP_edit = CookiesSP.edit();
+        CookiesSP_edit.putString(String.valueOf(R.string.Cookies_SPkey1), eai_sess);
+        CookiesSP_edit.putString(String.valueOf(R.string.Cookies_SPkey2), UUkey);
+        CookiesSP_edit.commit();
     }
 
     public static String[] ReadCookies(Context context) {
         String[] C = new String[2];
-        final SharedPreferences loggedSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
-        C[0] = loggedSP.getString(String.valueOf(R.string.Cookies_SPkey1), "");
-        C[1] = loggedSP.getString(String.valueOf(R.string.Cookies_SPkey2), "");
+        final SharedPreferences CookiesSP = context.getSharedPreferences(String.valueOf(R.string.Cookies_SPname), MODE_PRIVATE);
+        C[0] = CookiesSP.getString(String.valueOf(R.string.Cookies_SPkey1), "");
+        C[1] = CookiesSP.getString(String.valueOf(R.string.Cookies_SPkey2), "");
         return C;
     }
 

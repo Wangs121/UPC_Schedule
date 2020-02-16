@@ -204,6 +204,7 @@ public class HomeFragment extends Fragment{
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void refresh(){
         if(selectedWeek != currentWeek){
             term.setText("点击返回");

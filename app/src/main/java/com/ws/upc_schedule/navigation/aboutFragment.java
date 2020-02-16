@@ -17,12 +17,11 @@ import com.ws.upc_schedule.R;
 
 public class aboutFragment extends Fragment {
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_about, container, false);
         final TextView version = root.findViewById(R.id.version);
-        version.setText(BuildConfig.VERSION_NAME);
+        version.setText("版本:" + BuildConfig.VERSION_NAME);
         return root;
     }
 }

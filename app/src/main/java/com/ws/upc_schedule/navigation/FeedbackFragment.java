@@ -24,16 +24,16 @@ public class FeedbackFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_feedback, container, false);
-        final Button launchQQButton = root.findViewById(R.id.launchQQ);
+//        final Button launchQQButton = root.findViewById(R.id.launchQQ);
         final Button launchGitHub = root.findViewById(R.id.launchGithub);
         final Button launchCoolApk = root.findViewById(R.id.launchCoolApk);
-        launchQQButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "mqqwpa://im/chat?chat_type=wpa&uin=79223948";
-                startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url)));
-            }
-        });
+//        launchQQButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = "mqqwpa://im/chat?chat_type=wpa&uin=79223948";
+//                startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url)));
+//            }
+//        });
 
         launchGitHub.setOnClickListener(new View.OnClickListener() {
             @Override

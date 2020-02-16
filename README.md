@@ -1,14 +1,38 @@
 # 软件介绍
 
-仅适用于 `中国石油大学(华东)` 的一款课程表软件，支持添加小部件至桌面
+仅适用于 `中国石油大学(华东)` 的一款课程表软件，支持添加小部件至桌面，不支持显示小学期课程。
 
 现已上架[酷安网](https://coolapk.com/apk/com.ws.upc_schedule)
 
+**若使用本软件，请确保在每次更新完课程数据后都与课程信息源进行核对，确定数据正确才使用。**
+
+> 课程信息源为：微信石大企业号-教务信息-微查询-学生课表
+
+（不要在开学当天更新课程数据，因为计算学期的方法是先爬第二学期，若爬取到开学第一天等于手机时间则为第一学期（数据源规律），否则为第二学期）
+
 ![home](pic-home.png) ![widget](pic-widget.png) ![navigation](pic-navigation.png) ![setting](pic-setting.png) 
 
-![pic-video](pic-video.gif)
 
 
+# 更新说明
+
+### 1.0
+
+增加了点击小部件`星期`栏更新小部件功能
+
+增加了一个打开导航栏的按键
+
+增加了`返回当前周`的提示
+
+删除`使用QQ联系开发者`的功能
+
+修复了小部件左侧节数与课程没对齐的bug
+
+修复`退出登录`时用户数据清除不完全的bug
+
+### 0.9BETA
+
+完成基本功能
 
 # 项目进度 --基本功能已完成
 
@@ -124,22 +148,23 @@
 * 实现使用Jsoup抓取目标（课表）信息
 * 登录界面设计完成
 
-# 待办
+# 感谢一下开源库、App及文章
 
-* 反馈页面
-* 关于页面
-* 更新、反馈方法
-* 美化
+### App
 
-# 程序逻辑框图
+[mnnyang](https://github.com/mnnyang)/**[ClassSchedule](https://github.com/mnnyang/ClassSchedule)**（licensed under the **Apache License 2.0**）
 
-UML一直没耐心学，自己随便画的:cry:
+ [limit-DNE](https://github.com/limit-DNE)/**[SQLiteDemo](https://github.com/limit-DNE/SQLiteDemo)**
 
-画图是为了说明/理清一些类的功能和各类之间的联系(很久没更新了)
+### 第三方库
 
-![程序逻辑框图](AppLogicGraph.png)
+[google](https://github.com/google)/**[gson](https://github.com/google/gson)**
 
-# 对我有帮助的文章/lib
+ [jlurena](https://github.com/jlurena)/**[revolvingweekview](https://github.com/jlurena/revolvingweekview)**
+
+ [jhy](https://github.com/jhy)/**[jsoup](https://github.com/jhy/jsoup)**
+
+### 文章/教程
 
 [使用 SQLite 保存数据](https://developer.android.com/training/data-storage/sqlite?hl=zh_cn#java)
 
@@ -151,10 +176,6 @@ UML一直没耐心学，自己随便画的:cry:
 
 [Android Widgets](https://medium.com/android-bits/android-widgets-ad3d166458d3)
 
-[mnnyang](https://github.com/mnnyang)/**[ClassSchedule](https://github.com/mnnyang/ClassSchedule)**
-
-[google](https://github.com/google)/**[gson](https://github.com/google/gson)**
-
 [GSON throwing “Expected BEGIN_OBJECT but was BEGIN_ARRAY”?](https://stackoverflow.com/questions/9598707/gson-throwing-expected-begin-object-but-was-begin-array)
 
 [Gson解析多层嵌套复杂数据](https://my.oschina.net/ydsakyclguozi/blog/480050)
@@ -165,9 +186,9 @@ UML一直没耐心学，自己随便画的:cry:
 
 [Understanding AsyncTask – Once and Forever](https://androidresearch.wordpress.com/2012/03/17/understanding-asynctask-once-and-forever/)
 
- [jlurena](https://github.com/jlurena)/**[revolvingweekview](https://github.com/jlurena/revolvingweekview)**
-
 [Android Intents - Tutorial](https://www.vogella.com/tutorials/AndroidIntent/article.html)
+
+[Java – Add days to Date](https://beginnersbook.com/2017/10/java-add-days-to-date/)
 
 [Start new Activity and finish current one in Android? duplicate](https://stackoverflow.com/questions/11308198/start-new-activity-and-finish-current-one-in-android)
 
