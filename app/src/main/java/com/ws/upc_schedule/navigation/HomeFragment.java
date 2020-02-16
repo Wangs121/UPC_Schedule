@@ -204,7 +204,13 @@ public class HomeFragment extends Fragment{
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void refresh(){
+        if(selectedWeek != currentWeek){
+            term.setText("点击返回");
+        }else {
+            term.setText(dateUtils.getStuYear());
+        }
         mWeekView.goToDay(7);
         this.week.setText("第"+selectedWeek+"周");
         YMdate.setText(selectedYMD.substring(0,7));

@@ -18,7 +18,7 @@
         android:id="@+id/previousWeek"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="60dp"
         android:src="@drawable/back"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints"
@@ -30,7 +30,7 @@
         android:layout_height="60dp"
         android:text="next"
         tools:ignore="MissingConstraints"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="60dp"
         android:layout_marginTop="5dp"
         android:src="@drawable/forward"
         android:background="#00FFFFFF"/>

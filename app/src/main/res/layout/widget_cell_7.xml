@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/widget_cell_7"
         android:layout_width="fill_parent"
-        android:layout_height="215.0dp"
+        android:layout_height="257.0dp"
         android:layout_margin="1.0dp"
         android:background="@android:color/transparent"
         android:padding="2dp"
@@ -16,6 +16,6 @@
         android:gravity="center|top"
         android:text=""
         android:textColor="@color/white"
-        android:textSize="12.0sp"
+        android:textSize="11.0sp"
         android:textStyle="bold" />
 </LinearLayout>
