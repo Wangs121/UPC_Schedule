@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment{
         //初始化数据库
         dbHelper.initilize(getContext());
         //更新小部件
-//        WidgetUtils.updateWidget(getContext());
+        WidgetUtils.updateWidget(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mWeekView = (WeekView) root.findViewById(R.id.revolving_weekview);
         backButton = (Button) root.findViewById(R.id.back);

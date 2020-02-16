@@ -237,7 +237,7 @@ public class SettingFragment extends Fragment {
                 week++;
             }
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "数据更新完成", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "数据更新完成，重启软件生效", Toast.LENGTH_SHORT).show();
 
         }
     }

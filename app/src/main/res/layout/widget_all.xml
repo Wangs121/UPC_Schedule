@@ -20,7 +20,17 @@
             android:gravity="center"
             android:textColor="@color/widget_title_text_color"
             android:textSize="11sp"
-            tools:text="1\n月" />
+            tools:text="1\n周" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日"
+            android:textColor="@color/widget_title_text_color"
+            android:textSize="12sp" />
+
 
         <TextView
             android:layout_width="0dp"
@@ -78,16 +88,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="六"
-            android:textColor="@color/widget_title_text_color"
-            android:textSize="12sp" />
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="日"
             android:textColor="@color/widget_title_text_color"
             android:textSize="12sp" />
 
