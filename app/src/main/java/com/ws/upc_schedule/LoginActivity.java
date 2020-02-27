@@ -1,6 +1,5 @@
 package com.ws.upc_schedule;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -29,7 +28,6 @@ import com.ws.upc_schedule.Login.LoginViewModel;
 import com.ws.upc_schedule.Login.LoginViewModelFactory;
 import com.ws.upc_schedule.Login.LogindbHelper;
 import com.ws.upc_schedule.Login.Result;
-import com.ws.upc_schedule.data.Course;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

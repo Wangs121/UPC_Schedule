@@ -16,9 +16,9 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/previousWeek"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="60dp"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_width"
+        android:layout_marginLeft="@dimen/image_width"
         android:src="@drawable/back"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints"
@@ -26,11 +26,11 @@
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/nextWeek"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_width"
         android:text="next"
         tools:ignore="MissingConstraints"
-        android:layout_marginRight="60dp"
+        android:layout_marginRight="@dimen/image_width"
         android:layout_marginTop="5dp"
         android:src="@drawable/forward"
         android:background="#00FFFFFF"/>
@@ -45,7 +45,7 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="15dp"/>
+        android:textSize="@dimen/home_header"/>
     <TextView
         android:id="@+id/week"
         android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="15dp"/>
+        android:textSize="@dimen/home_header"/>
     <TextView
         android:id="@+id/YMdate"
         android:layout_width="wrap_content"
@@ -65,17 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/week"
-        android:textSize="15dp"/>
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="1月"-->
-<!--        android:textSize="15dp"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:layout_marginLeft="10dp"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/revolving_weekview"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        tools:ignore="MissingConstraints" />-->
+        android:textSize="@dimen/home_header"/>
 
 
 
@@ -84,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/YMdate"
-        app:eventTextSize="11dp"
+        app:eventTextSize="@dimen/event_text_size"
         app:dayBackgroundColor="#05000000"
         app:eventTextColor="@android:color/white"
         app:headerColumnBackground="#ffefefef"
@@ -92,7 +82,8 @@
         app:headerColumnTextColor="#8f000000"
         app:headerRowBackgroundColor="#00000000"
         app:headerRowPadding="10dp"
-        app:hourHeight="40dp"
+        app:hourHeight="50dp"
+        app:textSize="@dimen/row_colum_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:noOfVisibleDays="7"
@@ -107,7 +98,5 @@
         app:horizontalFlingEnabled="false"
         app:xScrollingSpeed="0"
         />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

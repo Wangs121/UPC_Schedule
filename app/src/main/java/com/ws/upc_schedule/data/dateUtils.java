@@ -1,13 +1,10 @@
 package com.ws.upc_schedule.data;
 
-import android.content.Context;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
 import java.time.temporal.ChronoUnit;
-
-import com.ws.upc_schedule.Login.LoginRepository;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,9 +13,7 @@ import java.util.Date;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class dateUtils {
-    private static Date now = new Date();
     private static String termBeginDay;
-    private static int currentWeek = 0;
     private static String term;
     private static String stuYear = null;//aaaa-bbbb年第n学期
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -32,6 +27,7 @@ public class dateUtils {
     }
 
     public static String getStuYear() {
+        Date now = new Date();
         if (stuYear == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
             int year = Integer.parseInt(sdf.format(now));
@@ -53,8 +49,8 @@ public class dateUtils {
     }
 
     public static int getCurrentWeek() {
-        if (currentWeek == 0) {
-
+            int currentWeek = 1;
+            Date now = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String n = sdf.format(now);
 
@@ -68,8 +64,7 @@ public class dateUtils {
             if (currentWeek > 18) {
                 currentWeek = 18;
             }
-        }
-        return currentWeek;
+            return currentWeek;
     }
 
     //获得第Week周的第一天的YDM

@@ -12,9 +12,15 @@ import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
 
+import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.MainActivity;
 import com.ws.upc_schedule.R;
-import com.ws.upc_schedule.data.dateUtils;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  * Implementation of App Widget functionality.
@@ -23,9 +29,11 @@ public class ScheduleWidget extends AppWidgetProvider {
 
     private ComponentName thisWidget;
     private RemoteViews remoteViews;
-    private static final String ACTION_SIMPLEAPPWIDGET = "ACTION_BROADCASTWIDGETSAMPLE";
+    private static final String ACTION_SIMPLEAPPWIDGET = "ACTION_UPDATE_CLICK";
 
-    /** AppWidgetProvider 继承自 BroadcastReceiver */
+    /**
+     * AppWidgetProvider 继承自 BroadcastReceiver
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -34,7 +42,7 @@ public class ScheduleWidget extends AppWidgetProvider {
             updateAction(context);
         }
         if (intent != null && intent.getAction() != null) {
-            Log.e(this.toString(), intent.getAction());
+//            Log.e(this.toString(), intent.getAction());
             if (intent.getAction().equals("com.ws.upc_schedule.action.APPWIDGET_UPDATE")) {
                 updateAction(context);
             }
@@ -53,23 +61,21 @@ public class ScheduleWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 //        Log.d(this.toString(), "onUpdate" + appWidgetIds[0]);
-        Log.d("widget","on Update");
+        Log.d("widget", "on Update");
         updateAction(context);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateAction(Context context) {
-
+        Log.d("widget", "on UpdateAction");
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetId = appWidgetManager.getAppWidgetIds(new ComponentName(context, ScheduleWidget.class));
 
         thisWidget = new ComponentName(context, ScheduleWidget.class);
         remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_all);
 
-//        int month = TimeUtils.getNowMonth();
-        int week = dateUtils.getCurrentWeek();
-//        int week = 1;
-        remoteViews.setTextViewText(R.id.tv_month,week+"\n周");
+        int week = getCurrentWeek(context);
+        remoteViews.setTextViewText(R.id.tv_month, week + "\n周");
 
         Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -86,11 +92,11 @@ public class ScheduleWidget extends AppWidgetProvider {
         remoteViews.setPendingIntentTemplate(R.id.widget_list, pendingIntentTemplate);
 
         //点击标题栏更新wigdet
-        Intent update = new Intent(context,ScheduleWidget.class);
+        Intent update = new Intent(context, ScheduleWidget.class);
         update.setAction(ACTION_SIMPLEAPPWIDGET);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, update,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        remoteViews.setOnClickPendingIntent(R.id.widget_all,pendingIntent);
+        remoteViews.setOnClickPendingIntent(R.id.widget_all, pendingIntent);
         //更新remoteViews
         appWidgetManager.updateAppWidget(thisWidget, remoteViews);
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
@@ -99,7 +105,9 @@ public class ScheduleWidget extends AppWidgetProvider {
         manager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
     }
 
-    /** onDeleted()：当 Widget 被删除时调用该方法。 */
+    /**
+     * onDeleted()：当 Widget 被删除时调用该方法。
+     */
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
@@ -131,5 +139,25 @@ public class ScheduleWidget extends AppWidgetProvider {
         WidgetUtils.cancelUpdateWidgetService(context.getApplicationContext());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static int getCurrentWeek(Context context) {
+        int currentWeek = 1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String n = sdf.format(now);
+        String termBeginDay = LoginRepository.getFirstDayofTerm(context);
+        LocalDate d1 = LocalDate.parse(termBeginDay, formatter);
+        LocalDate d2 = LocalDate.parse(n, formatter);
+        int delta = (int) ChronoUnit.DAYS.between(d1, d2);
+        currentWeek = (int) (delta / 7) + 1;
+        if (currentWeek < 1) {
+            currentWeek = 1;
+        }
+        if (currentWeek > 18) {
+            currentWeek = 18;
+        }
+        return currentWeek;
+    }
 }
 

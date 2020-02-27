@@ -31,8 +31,11 @@ public class WidgetUtils {
             JobInfo.Builder builder = new JobInfo.Builder(UPDATE_WIDGET_JOB_ID,
                     new ComponentName(context, UpdteJobService.class));
             builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_NONE);
+            builder.setPersisted(true);// 设置设备重启时，执行该任务
             builder.setRequiresCharging(true);
-            builder.setPeriodic(60 * 1000); //一小时更新一次
+            builder.setPeriodic(2 * 60 * 60 * 1000); //两小时更新一次
+//            builder.setPeriodic(5*60*1000,5*60*1000); //5min更新一次
+            builder.setPersisted(true);
             jobScheduler.schedule(builder.build());
         } else {
 //            LogUtil.i(AppUtils.class, "widget更新任务已经安排");

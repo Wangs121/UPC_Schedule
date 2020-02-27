@@ -17,4 +17,5 @@
 <!--    widget-->
     <color name="widget_title_text_color">#eeFFFFFF</color>
     <color name="widget_all_background">#40ffffff</color>
+
 </resources>

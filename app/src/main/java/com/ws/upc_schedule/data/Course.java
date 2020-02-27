@@ -4,8 +4,6 @@ import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -14,8 +12,6 @@ public class Course {
 
     private static final Random random = new Random();
     private static Map<String,Integer> colors = new HashMap<>();
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    private static Calendar c = Calendar.getInstance();
 
 
 //    private String index;
@@ -110,7 +106,7 @@ public class Course {
             r= random.nextInt(256);
             g= random.nextInt(256);
             b= random.nextInt(256);
-        }while (r+g+b>600);
+        }while ((r*0.299 + g*0.587 + b*0.114)>186);
         return Color.argb(255,r,g,b);
     }
 }

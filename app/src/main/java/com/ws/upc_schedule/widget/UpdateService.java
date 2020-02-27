@@ -2,6 +2,7 @@ package com.ws.upc_schedule.widget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Looper;
 import android.widget.RemoteViews;
@@ -9,11 +10,17 @@ import android.widget.RemoteViewsService;
 
 import androidx.annotation.RequiresApi;
 
+import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.ClassesDataBase;
 import com.ws.upc_schedule.data.Course;
-import com.ws.upc_schedule.data.dbHelper;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UpdateService extends RemoteViewsService {
@@ -29,10 +36,9 @@ public class UpdateService extends RemoteViewsService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void initData() {
-        //TODO 添加当前课程
-        mCourses = dbHelper.getCurrentCourses();
-
+    private void initData(Context context) {
+        //添加课程
+        mCourses = getCurrentCoueses(context);
     }
 
     @Override
@@ -77,7 +83,7 @@ public class UpdateService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int position) {
 //            LogUtil.e(this, "getViewAt");
-            initData();
+            initData(mContext);
 
             final RemoteViews bigRemoteViews = new RemoteViews(mContext.getPackageName(), R.layout.list_demo_item);
             bigRemoteViews.removeAllViews(R.id.item_node_group);
@@ -166,11 +172,11 @@ public class UpdateService extends RemoteViewsService {
 
                         if (id != -1) {
                             dayRemoteViews = new RemoteViews(getPackageName(), layout);
-                            dayRemoteViews.setTextViewText(id, course.getName()+"\n"+course.getLocation());
+                            dayRemoteViews.setTextViewText(id, course.getName() + "\n\n" + course.getLocation());
 
 //                            if (course.getActiveStatus()) {
-                                dayRemoteViews.setInt(id, "setBackgroundColor", course.getColor());
-                                dayRemoteViews.setInt(id, "setTextColor", 0xFFFFFFFF);
+                            dayRemoteViews.setInt(id, "setBackgroundColor", course.getColor());
+                            dayRemoteViews.setInt(id, "setTextColor", 0xFFFFFFFF);
 //                            } else {
 //                                dayRemoteViews.setInt(id, "setBackgroundColor", 0xFFE3EEF5);
 //                                dayRemoteViews.setInt(id, "setTextColor", 0xFFbadac9);
@@ -231,10 +237,70 @@ public class UpdateService extends RemoteViewsService {
     private Course getCourseByRowCol(int row, int col) {
         Course result = null;
         for (Course course : mCourses) {
-            if ((course.getDay()+1) == row && course.getStart() == col) {
+            if ((course.getDay() + 1) == row && course.getStart() == col) {
                 result = course;
             }
         }
         return result;
+    }
+
+    //获取week周的所有课程
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public List<Course> getCurrentCoueses(Context context) {
+        int week = getCurrentWeek(context);
+        ClassesDataBase dbHelper = new ClassesDataBase(context);
+        List<Course> courses = new ArrayList<>();
+        String index;
+        for (int days = 0; days < 7; days++) {
+            for (int classes = 1; classes < 12; classes++) {
+                if (week < 10) {
+                    if (classes < 10) {
+                        index = "0" + week + "-" + days + "-0" + classes;
+                    } else {
+                        index = "0" + week + "-" + days + "-" + classes;
+                    }
+                } else {
+                    if (classes < 10) {
+                        index = week + "-" + days + "-0" + classes;
+                    } else {
+                        index = week + "-" + days + "-" + classes;
+                    }
+                }
+//                Log.d("Courses",index);
+                Cursor data = dbHelper.getOneData(index);
+                if (data.getCount() > 0) {
+                    data.moveToNext();
+//                    Log.d("Courses",data.getString(0)+data.getString(1)+
+//                            data.getString(2)+ data.getString(3)+
+//                            data.getInt(4));
+                    courses.add(new Course(data.getString(0), data.getString(1),
+                            data.getString(2), data.getString(3),
+                            data.getInt(4)));
+                }
+            }
+        }
+        dbHelper.close();
+        return courses;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static int getCurrentWeek(Context context) {
+        int currentWeek = 1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String n = sdf.format(now);
+        String termBeginDay = LoginRepository.getFirstDayofTerm(context);
+        LocalDate d1 = LocalDate.parse(termBeginDay, formatter);
+        LocalDate d2 = LocalDate.parse(n, formatter);
+        int delta = (int) ChronoUnit.DAYS.between(d1, d2);
+        currentWeek = (int) (delta / 7) + 1;
+        if (currentWeek < 1) {
+            currentWeek = 1;
+        }
+        if (currentWeek > 18) {
+            currentWeek = 18;
+        }
+        return currentWeek;
     }
 }
