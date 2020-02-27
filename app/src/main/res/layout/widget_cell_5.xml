@@ -12,6 +12,6 @@
         android:background="@android:color/transparent"
         android:text=""
         android:gravity="center|top"
-        android:textSize="11.0sp"
+        android:textSize="@dimen/widget_text_size"
         android:textStyle="bold" />
 </LinearLayout>

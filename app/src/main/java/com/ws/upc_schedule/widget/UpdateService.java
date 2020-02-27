@@ -172,7 +172,7 @@ public class UpdateService extends RemoteViewsService {
 
                         if (id != -1) {
                             dayRemoteViews = new RemoteViews(getPackageName(), layout);
-                            dayRemoteViews.setTextViewText(id, course.getName() + "\n" + course.getLocation());
+                            dayRemoteViews.setTextViewText(id, course.getName() + "\n\n" + course.getLocation());
 
 //                            if (course.getActiveStatus()) {
                             dayRemoteViews.setInt(id, "setBackgroundColor", course.getColor());

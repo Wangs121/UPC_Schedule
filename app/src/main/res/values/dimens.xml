@@ -11,4 +11,9 @@ Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_text_size">4.8pt</dimen>
+    <dimen name="image_width">30pt</dimen>
+    <dimen name="home_header">7.5pt</dimen>
+    <dimen name="event_text_size">5.1pt</dimen>
+    <dimen name="row_colum_text_size">5.5pt</dimen>
 </resources>

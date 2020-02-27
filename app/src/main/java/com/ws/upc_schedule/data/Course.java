@@ -4,9 +4,6 @@ import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
 
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -15,8 +12,6 @@ public class Course {
 
     private static final Random random = new Random();
     private static Map<String,Integer> colors = new HashMap<>();
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    private static Calendar c = Calendar.getInstance();
 
 
 //    private String index;
