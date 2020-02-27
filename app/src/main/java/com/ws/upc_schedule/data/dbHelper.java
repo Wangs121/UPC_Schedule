@@ -3,7 +3,6 @@ package com.ws.upc_schedule.data;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 

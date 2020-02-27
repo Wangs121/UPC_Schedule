@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,7 @@ public class HomeFragment extends Fragment{
         currentYMD = dateUtils.getFirstDayofWeek(currentWeek);
         selectedYMD = currentYMD;
         weekMonthDays = dateUtils.getWeekMonthDays(currentYMD);
-        courses = dbHelper.getCurrentCourses();
+        courses = dbHelper.getOneWeekCoueses(currentWeek);
 
 
         term.setText(dateUtils.getStuYear());
@@ -90,7 +91,7 @@ public class HomeFragment extends Fragment{
                 selectedWeek = currentWeek;
                 selectedYMD = currentYMD;
                 weekMonthDays = dateUtils.getWeekMonthDays(currentYMD);
-                courses = dbHelper.getCurrentCourses();
+                courses = dbHelper.getOneWeekCoueses(currentWeek);
                 refresh();
             }
         });
@@ -160,7 +161,22 @@ public class HomeFragment extends Fragment{
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onResume() {
+        Log.d("date","onResume");
+        currentWeek = dateUtils.getCurrentWeek();
+        selectedWeek = currentWeek;
+        currentYMD = dateUtils.getFirstDayofWeek(currentWeek);
+        selectedYMD = currentYMD;
+        weekMonthDays = dateUtils.getWeekMonthDays(currentYMD);
+        courses = dbHelper.getOneWeekCoueses(currentWeek);
 
+        term.setText(dateUtils.getStuYear());
+        week.setText("第"+currentWeek+"周");
+        YMdate.setText(currentYMD.substring(0,7));
+        super.onResume();
+    }
     /**
      * Set up a date time interpreter which will show short date values when in week view and long
      * date values otherwise.
