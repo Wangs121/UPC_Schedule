@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -15,7 +14,6 @@ import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.ClassesDataBase;
 import com.ws.upc_schedule.data.Course;
-import com.ws.upc_schedule.data.dateUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -245,6 +243,7 @@ public class UpdateService extends RemoteViewsService {
         }
         return result;
     }
+
     //获取week周的所有课程
     @RequiresApi(api = Build.VERSION_CODES.O)
     public List<Course> getCurrentCoueses(Context context) {
@@ -283,6 +282,7 @@ public class UpdateService extends RemoteViewsService {
         dbHelper.close();
         return courses;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static int getCurrentWeek(Context context) {
         int currentWeek = 1;

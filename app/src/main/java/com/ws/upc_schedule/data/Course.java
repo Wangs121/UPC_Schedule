@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -110,7 +111,7 @@ public class Course {
             r= random.nextInt(256);
             g= random.nextInt(256);
             b= random.nextInt(256);
-        }while (r+g+b>600);
+        }while ((r*0.299 + g*0.587 + b*0.114)>186);
         return Color.argb(255,r,g,b);
     }
 }

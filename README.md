@@ -33,7 +33,7 @@
 
 * 修复了许多场景下需要强行停止应用才能更新数据的问题
 * 修复了程序后台关闭后无法从数据库读取数据（桌面小部件刷新数据会导致程序停止运行）的问题
-* 
+* 使用了更优化的算法生成适应白字的课程背景颜色
 
 ### 1.0
 
@@ -101,3 +101,4 @@
 
 [AsyncTask](https://developer.android.com/reference/android/os/AsyncTask)
 
+[How to decide font color in white or black depending on background color?](https://stackoverflow.com/a/3943023/12008673)
