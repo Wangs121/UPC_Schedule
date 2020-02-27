@@ -12,8 +12,16 @@ import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
 
+import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.MainActivity;
 import com.ws.upc_schedule.R;
+import com.ws.upc_schedule.data.dateUtils;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  * Implementation of App Widget functionality.
@@ -58,15 +66,14 @@ public class ScheduleWidget extends AppWidgetProvider {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateAction(Context context) {
-
+        Log.d("widget","on UpdateAction");
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int[] appWidgetId = appWidgetManager.getAppWidgetIds(new ComponentName(context, ScheduleWidget.class));
 
         thisWidget = new ComponentName(context, ScheduleWidget.class);
         remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_all);
 
-//        int week = dateUtils.getCurrentWeek();
-        int week =1;
+        int week = getCurrentWeek(context);
         remoteViews.setTextViewText(R.id.tv_month,week+"\n周");
 
         Intent intent = new Intent(context, UpdateService.class);
@@ -129,5 +136,25 @@ public class ScheduleWidget extends AppWidgetProvider {
         WidgetUtils.cancelUpdateWidgetService(context.getApplicationContext());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static int getCurrentWeek(Context context) {
+        int currentWeek = 1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String n = sdf.format(now);
+        String termBeginDay = LoginRepository.getFirstDayofTerm(context);
+        LocalDate d1 = LocalDate.parse(termBeginDay, formatter);
+        LocalDate d2 = LocalDate.parse(n, formatter);
+        int delta = (int) ChronoUnit.DAYS.between(d1, d2);
+        currentWeek = (int) (delta / 7) + 1;
+        if (currentWeek < 1) {
+            currentWeek = 1;
+        }
+        if (currentWeek > 18) {
+            currentWeek = 18;
+        }
+        return currentWeek;
+    }
 }
 

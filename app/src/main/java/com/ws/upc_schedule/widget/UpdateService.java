@@ -11,12 +11,18 @@ import android.widget.RemoteViewsService;
 
 import androidx.annotation.RequiresApi;
 
+import com.ws.upc_schedule.Login.LoginRepository;
 import com.ws.upc_schedule.R;
 import com.ws.upc_schedule.data.ClassesDataBase;
 import com.ws.upc_schedule.data.Course;
 import com.ws.upc_schedule.data.dateUtils;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UpdateService extends RemoteViewsService {
@@ -34,17 +40,7 @@ public class UpdateService extends RemoteViewsService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initData(Context context) {
         //添加课程
-//        int week = dateUtils.getCurrentWeek();
-            //        if(week == buffer.getCurrentWeek()){
-        Log.d("widget","get Courses");
-            mCourses = getCurrentCoueses(context);
-        Log.d("widget",mCourses.toString());
-//        }else{
-//            mCourses = buffer.getNextCourses();
-//        }
-
-
-
+        mCourses = getCurrentCoueses(context);
     }
 
     @Override
@@ -252,7 +248,7 @@ public class UpdateService extends RemoteViewsService {
     //获取week周的所有课程
     @RequiresApi(api = Build.VERSION_CODES.O)
     public List<Course> getCurrentCoueses(Context context) {
-        int week = dateUtils.getCurrentWeek();
+        int week = getCurrentWeek(context);
         ClassesDataBase dbHelper = new ClassesDataBase(context);
         List<Course> courses = new ArrayList<>();
         String index;
@@ -287,5 +283,24 @@ public class UpdateService extends RemoteViewsService {
         dbHelper.close();
         return courses;
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static int getCurrentWeek(Context context) {
+        int currentWeek = 1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String n = sdf.format(now);
+        String termBeginDay = LoginRepository.getFirstDayofTerm(context);
+        LocalDate d1 = LocalDate.parse(termBeginDay, formatter);
+        LocalDate d2 = LocalDate.parse(n, formatter);
+        int delta = (int) ChronoUnit.DAYS.between(d1, d2);
+        currentWeek = (int) (delta / 7) + 1;
+        if (currentWeek < 1) {
+            currentWeek = 1;
+        }
+        if (currentWeek > 18) {
+            currentWeek = 18;
+        }
+        return currentWeek;
+    }
 }
