@@ -37,7 +37,7 @@ import me.jlurena.revolvingweekview.WeekView;
 import me.jlurena.revolvingweekview.WeekViewEvent;
 
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private WeekView mWeekView;
     private Button backButton;
@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment{
     private ImageButton nextWeekButton;
     private ImageButton previousWeekButton;
 
-    private int currentWeek ;
+    private int currentWeek;
     private int selectedWeek;
 
     private String currentYMD;
@@ -61,8 +61,6 @@ public class HomeFragment extends Fragment{
 
         //初始化数据库
         dbHelper.initilize(getContext());
-        //更新小部件
-        WidgetUtils.updateWidget(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         mWeekView = (WeekView) root.findViewById(R.id.revolving_weekview);
         backButton = (Button) root.findViewById(R.id.back);
@@ -80,10 +78,13 @@ public class HomeFragment extends Fragment{
         weekMonthDays = dateUtils.getWeekMonthDays(currentYMD);
         courses = dbHelper.getOneWeekCoueses(currentWeek);
 
+        //更新小部件
+        WidgetUtils.updateWidget(getContext());
+
 
         term.setText(dateUtils.getStuYear());
-        week.setText("第"+currentWeek+"周");
-        YMdate.setText(currentYMD.substring(0,7));
+        week.setText("第" + currentWeek + "周");
+        YMdate.setText(currentYMD.substring(0, 7));
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +99,8 @@ public class HomeFragment extends Fragment{
         nextWeekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedWeek<18){
-                    selectedWeek +=1;
+                if (selectedWeek < 18) {
+                    selectedWeek += 1;
                 }
                 selectedYMD = dateUtils.getFirstDayofWeek(selectedWeek);
                 weekMonthDays = dateUtils.getWeekMonthDays(selectedYMD);
@@ -110,8 +111,8 @@ public class HomeFragment extends Fragment{
         previousWeekButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedWeek>1){
-                    selectedWeek -=1;
+                if (selectedWeek > 1) {
+                    selectedWeek -= 1;
                 }
                 selectedYMD = dateUtils.getFirstDayofWeek(selectedWeek);
                 weekMonthDays = dateUtils.getWeekMonthDays(selectedYMD);
@@ -131,18 +132,18 @@ public class HomeFragment extends Fragment{
 //                }
 //
 
-                for(Course c:courses){
+                for (Course c : courses) {
                     int day = c.getDay();
-                    if (day==0){
-                        day=7;
+                    if (day == 0) {
+                        day = 7;
                     }
 //                    Log.d("Courses","week before"+c.getDay());
 //                    Log.d("Courses","week after"+week);
-                    DayTime startTime = new DayTime(DayOfWeek.of(day), LocalTime.of(c.geStart2Time(),0));
+                    DayTime startTime = new DayTime(DayOfWeek.of(day), LocalTime.of(c.geStart2Time(), 0));
                     DayTime endTime = new DayTime(startTime);
                     endTime.addHours(c.getLength());
                     WeekViewEvent event = new WeekViewEvent("0",
-                            c.getName()+"\n\n"+c.getLocation()+"\n"+c.getTeacher(),startTime,endTime);
+                            c.getName() + "\n\n" + c.getLocation() + "\n" + c.getTeacher(), startTime, endTime);
                     event.setColor(c.getColor());
                     events.add(event);
                 }
@@ -164,7 +165,7 @@ public class HomeFragment extends Fragment{
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onResume() {
-        Log.d("date","onResume");
+        Log.d("date", "onResume");
         currentWeek = dateUtils.getCurrentWeek();
         selectedWeek = currentWeek;
         currentYMD = dateUtils.getFirstDayofWeek(currentWeek);
@@ -173,10 +174,11 @@ public class HomeFragment extends Fragment{
         courses = dbHelper.getOneWeekCoueses(currentWeek);
 
         term.setText(dateUtils.getStuYear());
-        week.setText("第"+currentWeek+"周");
-        YMdate.setText(currentYMD.substring(0,7));
+        week.setText("第" + currentWeek + "周");
+        YMdate.setText(currentYMD.substring(0, 7));
         super.onResume();
     }
+
     /**
      * Set up a date time interpreter which will show short date values when in week view and long
      * date values otherwise.
@@ -188,16 +190,17 @@ public class HomeFragment extends Fragment{
 //                date = DayOfWeek.getValue();
 
                 String show = DayOfWeek.of(date).getDisplayName(TextStyle.SHORT, Locale.getDefault())
-                        +"\n" +(weekMonthDays[date%7]);
+                        + "\n" + (weekMonthDays[date % 7]);
                 return show;
             }
+
             @Override
             public String interpretTime(int hour, int minutes) {
                 if (hour > 11) {
-                    return (hour == 12 ? "12"  : (hour - 12) ) + " PM";
+                    return (hour == 12 ? "12" : (hour - 12)) + " PM";
                 } else {
                     if (hour == 0) {
-                        return "12" +" AM";
+                        return "12" + " AM";
                     } else {
                         return hour + " AM";
                     }
@@ -206,7 +209,8 @@ public class HomeFragment extends Fragment{
             }
         });
     }
-    public void dialog(String message){
+
+    public void dialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(message);
         builder.setTitle("课程详情");
@@ -220,15 +224,16 @@ public class HomeFragment extends Fragment{
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void refresh(){
-        if(selectedWeek != currentWeek){
+    public void refresh() {
+        if (selectedWeek != currentWeek) {
             term.setText("点击返回");
-        }else {
+        } else {
             term.setText(dateUtils.getStuYear());
         }
         mWeekView.goToDay(7);
-        this.week.setText("第"+selectedWeek+"周");
-        YMdate.setText(selectedYMD.substring(0,7));
+        this.week.setText("第" + selectedWeek + "周");
+        YMdate.setText(selectedYMD.substring(0, 7));
     }
 }

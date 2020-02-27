@@ -14,7 +14,6 @@ import androidx.annotation.RequiresApi;
 
 import com.ws.upc_schedule.MainActivity;
 import com.ws.upc_schedule.R;
-import com.ws.upc_schedule.data.dateUtils;
 
 /**
  * Implementation of App Widget functionality.
@@ -23,7 +22,7 @@ public class ScheduleWidget extends AppWidgetProvider {
 
     private ComponentName thisWidget;
     private RemoteViews remoteViews;
-    private static final String ACTION_SIMPLEAPPWIDGET = "ACTION_BROADCASTWIDGETSAMPLE";
+    private static final String ACTION_SIMPLEAPPWIDGET = "ACTION_UPDATE_CLICK";
 
     /** AppWidgetProvider 继承自 BroadcastReceiver */
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -34,7 +33,7 @@ public class ScheduleWidget extends AppWidgetProvider {
             updateAction(context);
         }
         if (intent != null && intent.getAction() != null) {
-            Log.e(this.toString(), intent.getAction());
+//            Log.e(this.toString(), intent.getAction());
             if (intent.getAction().equals("com.ws.upc_schedule.action.APPWIDGET_UPDATE")) {
                 updateAction(context);
             }
@@ -66,9 +65,8 @@ public class ScheduleWidget extends AppWidgetProvider {
         thisWidget = new ComponentName(context, ScheduleWidget.class);
         remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_all);
 
-//        int month = TimeUtils.getNowMonth();
-        int week = dateUtils.getCurrentWeek();
-//        int week = 1;
+//        int week = dateUtils.getCurrentWeek();
+        int week =1;
         remoteViews.setTextViewText(R.id.tv_month,week+"\n周");
 
         Intent intent = new Intent(context, UpdateService.class);
