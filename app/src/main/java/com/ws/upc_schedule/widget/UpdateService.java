@@ -27,7 +27,7 @@ public class UpdateService extends RemoteViewsService {
 
 
     private List<Course> mCourses;
-    private int maxNodeSize = 12;
+    private int maxNodeSize = 13;
 //    private int mCurrentWeek = 1;
 
     @Override
