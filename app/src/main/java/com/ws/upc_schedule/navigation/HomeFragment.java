@@ -139,11 +139,14 @@ public class HomeFragment extends Fragment {
                     }
 //                    Log.d("Courses","week before"+c.getDay());
 //                    Log.d("Courses","week after"+week);
-                    DayTime startTime = new DayTime(DayOfWeek.of(day), LocalTime.of(c.geStart2Time(), 0));
+                    int[] sT = c.geStart2Time();
+                    DayTime startTime = new DayTime(DayOfWeek.of(day), LocalTime.of(sT[0], sT[1]));
                     DayTime endTime = new DayTime(startTime);
-                    endTime.addHours(c.getLength());
+                    //endTime.addHours(c.getLength());
+                    endTime.addMinutes(c.getLength()*50-5);
                     WeekViewEvent event = new WeekViewEvent("0",
-                            c.getName() + "\n\n" + c.getLocation() + "\n\n" + c.getTeacher(), startTime, endTime);
+                            c.getName() + "\n\n" + c.getLocation() //+ "\n" + c.getTeacher()
+                             , startTime, endTime);
                     event.setColor(c.getColor());
                     events.add(event);
                 }

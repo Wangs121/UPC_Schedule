@@ -41,7 +41,7 @@ public class LoginDateUtils {
         LocalDate d2 = LocalDate.parse(YDM, formatter);
         days = (int) ChronoUnit.DAYS.between(d2, d1);
         Log.d("Login","与现在时间差值为:"+days);
-        if (days == 0) {
+        if (days >30 ) {
             return "1";
         } else {
             return "2";

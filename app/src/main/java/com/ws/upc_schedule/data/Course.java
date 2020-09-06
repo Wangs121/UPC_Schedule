@@ -59,34 +59,86 @@ public class Course {
         return start;
     }
 
-    public int geStart2Time(){
+    public int[] geStart2Time(){
+
+//        switch (start){
+//            case 1:
+//                return 8;
+//            case 2:
+//                return 9;
+//            case 3:
+//                return 10;
+//            case 4:
+//                return 11;
+//            case 5:
+//                return 14;
+//            case 6:
+//                return 15;
+//            case 7:
+//                return 16;
+//            case 8:
+//                return 17;
+//            case 9:
+//                return 19;
+//            case 10:
+//                return 20;
+//            case 11:
+//                return 21;
+//            case 12:
+//                return 22;
+//        }
+        int[] sT = new int[2];
         switch (start){
             case 1:
-                return 8;
+                sT[0] = 8;
+                sT[1] = 0;
+                break;
             case 2:
-                return 9;
+                sT[0] = 8;
+                sT[1] = 50;
+                break;
             case 3:
-                return 10;
+                sT[0] = 9;
+                sT[1] = 55;
+                break;
             case 4:
-                return 11;
+                sT[0] = 10;
+                sT[1] = 45;
+                break;
             case 5:
-                return 14;
+                sT[0] = 11;
+                sT[1] = 35;
+                break;
             case 6:
-                return 15;
+                sT[0] = 14;
+                sT[1] = 0;
+                break;
             case 7:
-                return 16;
+                sT[0] = 14;
+                sT[1] = 50;
+                break;
             case 8:
-                return 17;
+                sT[0] = 15;
+                sT[1] = 55;
+                break;
             case 9:
-                return 19;
+                sT[0] = 16;
+                sT[1] = 45;
+                break;
             case 10:
-                return 20;
+                sT[0] = 19;
+                sT[1] = 0;
+                break;
             case 11:
-                return 21;
+                sT[0] = 19;
+                sT[1] = 50;
+                break;
             case 12:
-                return 22;
+                sT[0] = 20;
+                sT[1] = 40;
+                break;
         }
-        return 0;
+        return sT;
     }
     public int getColor(){
         return color;
